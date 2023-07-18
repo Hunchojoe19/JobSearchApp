@@ -51,4 +51,9 @@
 }
 #auth {
   background-color: #edeff2;
+  /* background-color: red; */
+  width: 100%;
+}
+#hero {
+  background-color: white;
 }

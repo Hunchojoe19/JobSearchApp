@@ -12,17 +12,23 @@ const Auth = () => {
   });
   return (
     <section id="auth">
-      <div className="container h-full mx-auto mt-8">
-        <div className="flex flex-col justify-center items-center space-y-4">
+      <div className="container w-full h-[75vh] mx-auto mt-8 sm:w-full sm:h-[96vh] md:h-[75vh] lg:h-[110vh] xl:h-[90vh]">
+        <div className="flex flex-col justify-center items-center space-y-4 md:mt-12">
           {signUp ? (
-            <div className="flex flex-col justify-center items-center">
+            <div className="container flex flex-col justify-center items-center">
               <div className="my-4">
                 <h1 className="text-4xl font-bold text-fuchsia-700">
                   {signUp ? "WELCOME" : "WELCOME BACK"}
                 </h1>
               </div>
-              <div className="my-8 mx-auto flex flex-col justify-center items-center">
+              <div className="w-full h-full my-8 mx-auto flex flex-col justify-center items-center md:flex-col">
                 <ValidatorForm
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
                   onSubmit={() => console.log({ formValues }, "submitted")}
                   onError={(errors) => console.log(errors)}
                 >
@@ -38,6 +44,8 @@ const Auth = () => {
                         firstName: e.target.value,
                       })
                     }
+                    validators={["required"]}
+                    errorMessages={["this field is required"]}
                   />
                   <TextValidator
                     sx={{
@@ -55,11 +63,8 @@ const Auth = () => {
                         lastName: e.target.value,
                       })
                     }
-                    validators={["required", "isEmail"]}
-                    errorMessages={[
-                      "this field is required",
-                      "email is not valid",
-                    ]}
+                    validators={["required"]}
+                    errorMessages={["this field is required"]}
                   />
 
                   <TextValidator
@@ -83,7 +88,7 @@ const Auth = () => {
                       "email is not valid",
                     ]}
                   />
-                  <TextField
+                  <TextValidator
                     sx={{
                       marginTop: "2rem",
                       width: "350px",
@@ -100,6 +105,15 @@ const Auth = () => {
                         password: e.target.value,
                       })
                     }
+                    validators={[
+                      "required",
+                      "minStringLength:8",
+                      "matchRegexp:^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$",
+                    ]}
+                    errorMessages={[
+                      "this field is required",
+                      "Password must have a minimum of 8 characters, 1 uppercase letter, 1 lowercase letter, and 1 number",
+                    ]}
                   />
 
                   <button className="mx-24 mt-12 bg-blue-500 text-white font-['Inter] font-bold text-center w-[200px] h-16 rounded">
@@ -116,6 +130,12 @@ const Auth = () => {
                 </h1>
               </div>
               <ValidatorForm
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
                 onSubmit={() => console.log({ formValues }, "submitted")}
                 onError={(errors) => console.log(errors)}
               >
@@ -195,7 +215,7 @@ const Auth = () => {
                       style={{
                         textDecoration: "none",
                         cursor: "pointer",
-                        color: "red",
+                        color: "goldenrod",
                       }}
                       onClick={() => setSignUp(false)}
                     >

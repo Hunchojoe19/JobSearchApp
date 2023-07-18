@@ -5,30 +5,30 @@ const Navbar = () => {
   const [open, setOpen] = React.useState("");
 
   return (
-    <nav className="relative container mx-auto p-6">
-      <div className="flex items-center justify-between">
-        <div className="pt-2 w-64 h-24 flex justify-center items-center">
+    <nav className="relative container mx-auto p-6 ">
+      <div className="flex items-center justify-between ">
+        <div className="pt-2 w-64 h-4 flex justify-center items-center">
           <img src={logo} alt="logo" />
         </div>
-        <div className="hidden md:flex space-x-10">
-          <a href="" className="hover:text-darkGrayishBlue">
+        <div className="hidden md:flex space-x-10 text-1.5xl font-['Inter']">
+          <a href="/" className="hover:text-darkGrayishBlue">
             Home
           </a>
           <a href="" className="hover:text-darkGrayishBlue">
-            About Us
+            Search Jobs
           </a>
           <a href="" className="hover:text-darkGrayishBlue">
-            Contact
+            Recruiting?
           </a>
-          <a href="" className="hover:text-darkGrayishBlue">
+          {/* <a href="" className="hover:text-darkGrayishBlue">
             Follow Us
-          </a>
+          </a> */}
         </div>
         <a
           href=""
           className="hidden md:block p-3 px-6 pt-2 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight"
         >
-          Get Started
+          Apply Here
         </a>
         <button
           id="menu-btn"
@@ -55,14 +55,14 @@ const Navbar = () => {
             Home
           </a>
           <a href="" className="hover:text-darkGrayishBlue">
-            About Us
+            Search Jobs
           </a>
           <a href="" className="hover:text-darkGrayishBlue">
-            Contact
+            Recruiting?
           </a>
-          <a href="" className="hover:text-darkGrayishBlue">
+          {/* <a href="" className="hover:text-darkGrayishBlue">
             Follow Us
-          </a>
+          </a> */}
         </div>
       </div>
     </nav>
