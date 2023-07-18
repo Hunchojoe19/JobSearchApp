@@ -1,15 +1,19 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 import Auth from "./pages/Auth";
 import Navbar from "./components/Navbar";
+import LandingPage from "./pages/LandingPage";
+import Footer from "./components/Footer";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="app">
+    <div className="w-full">
       <Navbar />
-      <Auth />
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/auth" element={<Auth />} />
+      </Routes>
+      <Footer />
     </div>
   );
 }
