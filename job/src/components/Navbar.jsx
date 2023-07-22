@@ -11,13 +11,13 @@ const Navbar = () => {
           <img src={logo} alt="logo" />
         </div>
         <div className="hidden md:flex space-x-10 text-1.5xl font-['Inter']">
-          <a href="/" className="hover:text-darkGrayishBlue">
+          <a href="/home" className="hover:text-darkGrayishBlue">
             Home
           </a>
-          <a href="" className="hover:text-darkGrayishBlue">
+          <a href="/jobs" className="hover:text-darkGrayishBlue">
             Search Jobs
           </a>
-          <a href="" className="hover:text-darkGrayishBlue">
+          <a href="/organization" className="hover:text-darkGrayishBlue">
             Recruiting?
           </a>
           {/* <a href="" className="hover:text-darkGrayishBlue">
@@ -25,10 +25,10 @@ const Navbar = () => {
           </a> */}
         </div>
         <a
-          href=""
+          href="/auth"
           className="hidden md:block p-3 px-6 pt-2 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight"
         >
-          Apply Here
+          Job ?
         </a>
         <button
           id="menu-btn"
@@ -49,20 +49,20 @@ const Navbar = () => {
           id="menu"
           className={`${
             open ? "" : "hidden"
-          } absolute flex flex-col items-center self-end py-8 mt-10 space-y-6 font-bold bg-white sm:w-auto sm:self-center left-6 right-6 drop-shadow-md`}
+          } flex flex-col items-center self-end py-8 mt-10 space-y-6 font-bold bg-white sm:w-auto sm:self-center left-6 right-6 drop-shadow-md`}
         >
-          <a href="" className="hover:text-darkGrayishBlue">
+          <a href="/home" className="hover:text-darkGrayishBlue">
             Home
           </a>
           <a href="" className="hover:text-darkGrayishBlue">
             Search Jobs
           </a>
-          <a href="" className="hover:text-darkGrayishBlue">
+          <a href="/organization" className="hover:text-darkGrayishBlue">
             Recruiting?
           </a>
-          {/* <a href="" className="hover:text-darkGrayishBlue">
-            Follow Us
-          </a> */}
+          <a href="/auth" className="hover:text-darkGrayishBlue">
+            Looking For Job?
+          </a>
         </div>
       </div>
     </nav>

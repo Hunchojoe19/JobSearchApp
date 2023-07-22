@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { TextField } from "@mui/material";
 
-const Auth = () => {
+const Organization = () => {
   const [signUp, setSignUp] = useState(false);
   const [formValues, setFormValues] = useState({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
+    organizationName: "",
   });
   return (
     <section id="auth">
@@ -59,6 +60,24 @@ const Auth = () => {
                     setFormValues({
                       ...formValues,
                       lastName: e.target.value,
+                    })
+                  }
+                  validators={["required"]}
+                  errorMessages={["this field is required"]}
+                />
+                <TextValidator
+                  sx={{
+                    marginTop: "2rem",
+                    width: "350px",
+                  }}
+                  id="organizationName"
+                  label="Organization Name"
+                  variant="outlined"
+                  value={formValues.organizationName}
+                  onChange={(e) =>
+                    setFormValues({
+                      ...formValues,
+                      organizationName: e.target.value,
                     })
                   }
                   validators={["required"]}
@@ -221,4 +240,4 @@ const Auth = () => {
   );
 };
 
-export default Auth;
+export default Organization;
