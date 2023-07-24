@@ -1,4 +1,5 @@
 import { Box, Grid } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
 import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import LocationOn from "@mui/icons-material/LocationOn";
@@ -12,14 +13,15 @@ const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(2),
   textAlign: "center",
   minHeight: "200px",
-  border: "2px solid blue",
   borderRadius: "10px",
   marginBottom: "20px",
+  boxShadow: "0 0 10px rgba(0,0,0,0.5)",
 }));
 
 const Home = () => {
   const details = [
     {
+      id: 1,
       name: "Backend Developer",
       company: "Google",
       location: "Bangalore",
@@ -30,8 +32,11 @@ const Home = () => {
       time: "1 day ago",
       period: "Part Time",
       type: "Remote",
+      about:
+        " We are an entertainment startup company focused on creating, developing, and producing original content for the music industry. We are looking for a creative, driven, and passionate individual to join our team as a Content Creator. The ideal candidate will be responsible for creating",
     },
     {
+      id: 2,
       name: "Frontend Developer",
       company: "Amazon",
       location: "Bangalore",
@@ -42,8 +47,11 @@ const Home = () => {
       time: "1 day ago",
       period: "Contract",
       type: "Remote",
+      about:
+        "As a content contributor, you will have the opportunity to showcase and develop your writing skills, gain industry exposure, and be part of a growing vibrant music and entertainment movement.",
     },
     {
+      id: 3,
       name: "Full Stack Developer",
       company: "Microsoft",
       location: "Bangalore",
@@ -54,8 +62,11 @@ const Home = () => {
       time: "2 day ago",
       period: "Full Time",
       type: "Onsite",
+      about:
+        " We are an entertainment startup company focused on creating, developing, and producing original content for the music industry. We are looking for a creative, driven, and passionate individual to join our team as a Content Creator. The ideal candidate will be responsible for creating",
     },
     {
+      id: 4,
       name: "Backend Developer",
       company: "Google",
       location: "Bangalore",
@@ -66,8 +77,11 @@ const Home = () => {
       time: "3 day ago",
       period: "Contract",
       type: "Hybrid",
+      about:
+        " As a content contributor, you will have the opportunity to showcase and develop your writing skills, gain industry exposure, and be part of a growing vibrant music and entertainment movement.",
     },
     {
+      id: 5,
       name: "Backend Developer",
       company: "Google",
       location: "Bangalore",
@@ -79,8 +93,11 @@ const Home = () => {
       time: "4 day ago",
       period: "Part Time",
       type: "Onsite",
+      about:
+        " We are an entertainment startup company focused on creating, developing, and producing original content for the music industry. We are looking for a creative, driven, and passionate individual to join our team as a Content Creator. The ideal candidate will be responsible for creating",
     },
   ];
+  const navigate = useNavigate();
   return (
     <div className="container mx-auto mt-8">
       <Box sx={{ width: "100%", flexGrow: 1 }}>
@@ -120,13 +137,19 @@ const Home = () => {
           spacing={{ xs: 2, md: 3 }}
           columns={{ xs: 4, sm: 8, md: 12 }}
         >
-          {Array.from(details).map((detail, index) => (
-            <Grid item xs={12} sm={12} md={4} key={index}>
+          {Array.from(details).map((detail, id) => (
+            <Grid item xs={12} sm={12} md={4} key={id}>
               <Item>
                 <div className="flex flex-col justify-center items-start">
                   <h1 className="text-2xl font-bold font-['mono'] md:text-4xl lg:text-3xl">
                     {detail.name}
                   </h1>
+                  <p className="font-['Inter'] font-bold mt-2 md:text-xl lg:text-sm">
+                    {detail.company} - {detail.location}
+                  </p>
+                  <p className="mt-2 md:text-2xl lg:text-base">
+                    Experience: {detail.experience}
+                  </p>
                   <div className="flex justify-between items-center mt-2">
                     <p className="bg-green-300 p-2 rounded-full text-white md:text-xl lg:text-sm">
                       {detail.period}
@@ -135,12 +158,6 @@ const Home = () => {
                       {detail.type}
                     </p>
                   </div>
-                  <p className="font-['Inter'] font-bold mt-2 md:text-xl lg:text-sm">
-                    {detail.company} - {detail.location}
-                  </p>
-                  <p className="mt-2 md:text-2xl lg:text-base">
-                    Experience: {detail.experience}
-                  </p>
                   <span className="font-bold mt-2 md:text-xl lg:text-sm">
                     skills: {detail.skills}
                   </span>
@@ -150,10 +167,18 @@ const Home = () => {
                   <div className="flex justify-start mb-2 md:text-xl lg:text-sm">
                     {excerpt(detail.description, 40)}
                   </div>
-                  <button className="bg-gray-500 w-24 p-2 rounded-full text-white md:w-28">
+                  <button
+                    className="bg-gray-500 w-24 p-2 rounded-full text-white md:w-28"
+                    onClick={() =>
+                      navigate(`/details/${detail.id}`, {
+                        state: { detail },
+                      })
+                    }
+                  >
                     Read More
                   </button>
-                  <p className="mt-2 text-gray-400">Posted: {detail.time}</p>
+
+                  <i className="mt-2 text-gray-400">Posted: {detail.time}</i>
                 </div>
               </Item>
             </Grid>
