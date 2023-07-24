@@ -101,22 +101,28 @@ const Home = () => {
   return (
     <div className="container mx-auto mt-8">
       <Box sx={{ width: "100%", flexGrow: 1 }}>
-        <div className=" flex flex-col justify-center items-center shadow-md">
-          <div className="flex">
+        <div className=" flex flex-col justify-center items-center shadow-lg">
+          <div className="flex flex-col md:flex-row lg:flex-row mt-4">
             <div className="relative flex mb-2 md:mb-0">
               <input
                 type="text"
-                className="w-[350px] h-[50px] p-2 pr-6 border border border-gray-300 placeholder-slate-400 focus:outline-none rounded-md block w-full shadow-lg sm:text-sm md:w-[400px] md:text-base"
+                name="search"
+                className="w-[350px] h-[50px] p-2 pr-6 border border border-gray-300 placeholder-slate-400 focus:outline-none rounded-md block w-full shadow-lg sm:text-sm md:w-[350px] lg:w-[400px] md:text-base"
                 placeholder="remote"
               />
               <SearchIcon
-                sx={{ position: "absolute", right: "1px", top: "10px" }}
+                sx={{
+                  position: "absolute",
+                  right: "1px",
+                  top: "10px",
+                }}
               />
             </div>
-            <div className="relative flex mb-6 md:mb-0">
+            <div className="relative flex mb-6 md:mb-0 md:mx-6">
               <input
                 type="text"
-                className="w-[350px] h-[50px] p-2 pr-6 border border border-gray-300 placeholder-slate-400 focus:outline-none rounded-md block w-full shadow-lg sm:text-sm md:text-base"
+                name="location"
+                className="w-[355px] h-[50px] p-2 pr-6 border border border-gray-300 placeholder-slate-400 focus:outline-none rounded-md block w-full shadow-lg sm:text-sm lg:text-base lg:w-[400px]"
                 placeholder="city, state, zip code or country"
               />
               <LocationOn
@@ -124,7 +130,7 @@ const Home = () => {
               />
             </div>
           </div>
-          <button className="w-[140px] h-[60px] bg-blue-500 rounded-full font-normal text-white font-['Inter] mb-4 md:mt-4">
+          <button className="w-[140px] h-[50px] bg-blue-500 rounded-full font-normal text-white font-['Inter] mb-4 md:mt-4">
             Find a Job
           </button>
         </div>

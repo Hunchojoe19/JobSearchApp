@@ -1,4 +1,5 @@
 import { Grid } from "@mui/material";
+import FlagIcon from "@mui/icons-material/Flag";
 import React from "react";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import { useLocation, useParams } from "react-router-dom";
@@ -16,7 +17,7 @@ const Detail = () => {
           <h2 className="p-6 text-gray-600">Job Details</h2>
         </div>
         <div className="mt-6 rounded-lg border border-solid border-blue-600 mb-8">
-          <div className="mt-4 border-blue-400 border border-solid">
+          <div className="mt-4 border-blue-400 border border-solid border-x-0">
             <div>
               <h2 className="text-left text-2xl p-4 font-bold font-['Inter']">
                 {location.state.detail.name}
@@ -44,12 +45,12 @@ const Detail = () => {
                 </p>
               </div>
             </div>
-            <div className="flex border border-blue-300 mt-6 border-solid">
+            <div className="flex border border-blue-300 mt-6 border-solid border-x-0">
               <h2 className="p-4 font-bold text-xl font-mono text-gray-500">
                 Job Summary
               </h2>
             </div>
-            <div className="flex flex-col border border-blue-300 border-solid">
+            <div className="flex flex-col border border-blue-300 border-solid border-x-0">
               <div className="flex flex-col">
                 <h2 className="p-4 font-bold font-['Inter']">
                   Job Description/Requirements
@@ -78,6 +79,71 @@ const Detail = () => {
                     {location.state.detail.about}
                   </li>
                 </ul>
+              </div>
+              <div className="mt-4">
+                <p className="font-bold text-sm font-['Inter'] mx-4">
+                  Benefits:
+                </p>
+                <ul style={{ listStyle: "initial", marginLeft: "2rem" }}>
+                  <li className="mx-4 mt-2 text-left text-sm font-['Inter']">
+                    Gain exposure and build a portfolio with published work on
+                    our platforms. Network with entertainment industry
+                    enthusiasts, artists, and professionals. Work with tools and
+                    systems used by top companies such as{" "}
+                    <b>The New York Post</b>, <b>Sony Music </b>and{" "}
+                    <b>TechCrunch</b>. Training will be provided.
+                  </li>
+                  <li className="mx-4 mt-2 text-left text-sm font-['Inter']">
+                    Enjoy flexibility in contributing based on your
+                    availability.
+                  </li>
+                  <li className="mx-4 mt-2 text-left text-sm font-['Inter']">
+                    Access industry insights, exclusive interviews, and events..
+                  </li>
+                  <li className="mx-4 mt-2 text-left text-sm font-['Inter']">
+                    Enjoy free access to our creative studio facilities based on
+                    your contributions.
+                  </li>
+                </ul>
+              </div>
+              <div className="mt-4 flex">
+                <p className="mx-4"> Job Type: </p>
+                <p className="font-mono text-md ml-3 rounded-full px-2 text-white bg-green-400 text-gray-400">
+                  {location.state.detail.type}
+                </p>
+              </div>
+              <div className="mt-12 flex justify-center items-center mb-6">
+                <button className="rounded-lg py-2 px-28 bg-blue-900 text-white font-['Inter']">
+                  Apply Now
+                </button>
+              </div>
+              <div className="flex flex-col items-start border border-solid border-blue-400 border-x-0 border-b-0">
+                <div className="mt-2 ml-3">
+                  <h1 className="text-xl font-['Mono'] mb-4">
+                    Important Safety Tips
+                  </h1>
+                  <ul
+                    style={{
+                      listStyle: "initial",
+                      marginLeft: "2rem",
+                    }}
+                  >
+                    <li className="text-sm font-['Inter'] mb-4">
+                      Do not make any payment without confirming with the
+                      Jobberman Customer Support Team.
+                    </li>
+                    <li className="text-sm font-['Inter'] mb-4">
+                      If you think this advert is not genuine, please report it
+                      via the Report Job link below.
+                    </li>
+                  </ul>
+                </div>
+                <div className="flex container mt-6 mx-3 p-2 justify-center items-center rounded-lg  bg-gray-300 w-48 mb-8 cursor-pointer">
+                  <FlagIcon fontSize="medium" />
+                  <p className="rounded-lg text-black font-helvetica ml-3">
+                    Report Job
+                  </p>
+                </div>
               </div>
             </div>
           </div>
