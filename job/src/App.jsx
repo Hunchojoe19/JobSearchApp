@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import Organization from "./pages/Organization";
 import Home from "./pages/Home";
 import Detail from "./pages/Detail";
+import Register from "./pages/Register";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -17,6 +18,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<LandingPage />} />
+        <Route path="/signup" element={<Register />} />
         <Route path="/home" element={<Home />} />
         <Route path="/auth" element={<Auth />} />
         <Route path="/details/:id" element={<Detail />} />

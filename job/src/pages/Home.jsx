@@ -6,6 +6,7 @@ import LocationOn from "@mui/icons-material/LocationOn";
 import { experimentalStyled as styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import { excerpt } from "../utilities";
+import { useSelector } from "react-redux";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: "white",
@@ -89,7 +90,7 @@ const Home = () => {
       experience: "2 - 4 years",
       skills: "Java, Python, C++",
       description:
-        "Lorem ipsum dolor ghdghgdjhdh hasbibsduididsbhds hdsbidsbiudbdsubdsds isdbviudbaiudsbdiubdui",
+        "Lorem ipsum dolor ghdghgdjhdh hasbibsduididsbhds hdsbidsbiudbdsubdsds isdbviudbaiudsbdiubdui nhbuiubiybibiubibubibubiub jkkiboinhobnoinbobnoiubibhiubiubiubiu  ",
       time: "4 day ago",
       period: "Part Time",
       type: "Onsite",
@@ -98,6 +99,9 @@ const Home = () => {
     },
   ];
   const navigate = useNavigate();
+
+  const { userDetails: select } = useSelector((state) => state.userDetails);
+  console.log("user details ", select);
   return (
     <div className="container mx-auto mt-8">
       <Box sx={{ width: "100%", flexGrow: 1 }}>
@@ -122,7 +126,7 @@ const Home = () => {
               <input
                 type="text"
                 name="location"
-                className="w-[355px] h-[50px] p-2 pr-6 border border border-gray-300 placeholder-slate-400 focus:outline-none rounded-md block w-full shadow-lg sm:text-sm lg:text-base lg:w-[400px]"
+                className="w-[357px] h-[50px] p-2 pr-6 border border border-gray-300 placeholder-slate-400 focus:outline-none rounded-md block w-full shadow-lg sm:text-sm md:w-[360px] lg:text-base lg:w-[400px]"
                 placeholder="city, state, zip code or country"
               />
               <LocationOn
@@ -171,7 +175,9 @@ const Home = () => {
                     Description:
                   </p>
                   <div className="flex justify-start mb-2 md:text-xl lg:text-sm">
-                    {excerpt(detail.description, 40)}
+                    <p className="text-left ml-4">
+                      {excerpt(detail.description, 100)}
+                    </p>
                   </div>
                   <button
                     className="bg-gray-500 w-24 p-2 rounded-full text-white md:w-28"
