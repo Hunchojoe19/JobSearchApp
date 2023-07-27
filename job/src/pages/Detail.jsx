@@ -19,25 +19,25 @@ const Detail = () => {
         <div className="mt-6 rounded-lg border border-solid border-blue-600 mb-8">
           <div className="mt-4 border-blue-400 border border-solid border-x-0">
             <div>
-              <h2 className="text-left text-2xl p-4 font-bold font-['Inter']">
+              <h2 className="text-left text-2xl p-4 font-bold font-['Inter'] lg:text-3xl">
                 {location.state.detail.name}
               </h2>
             </div>
             <div className="">
-              <p className="font-mono text-xl ml-3 text-blue-500">
+              <p className="font-mono text-xl ml-3 text-blue-500 lg:text-2xl">
                 {location.state.detail.company}
               </p>
-              <p className="font-mono text-md ml-3 text-gray-400">
+              <p className="font-mono text-md ml-3 text-gray-400 lg:text-xl">
                 {location.state.detail.location}
               </p>
-              <p className="font-mono text-md ml-3 text-black-400 font-bold">
+              <p className="font-mono text-md ml-3 text-black-400 font-bold lg:text-xl">
                 Experience: {(" ", location.state.detail.experience)}
               </p>
             </div>
             <div className="flex justify-start ml-3 mt-4 items-center">
               <BusinessCenterIcon fontSize="medium" sx={{ fill: "gray" }} />
               <div className="flex flex-col">
-                <p className="font-mono text-md ml-3 mt-6 text-black-400">
+                <p className="font-['Inter'] text-md ml-3 mt-6 text-black-400 lg:text-lg">
                   Job Type
                 </p>
                 <p className="font-mono text-md ml-3 mt-2 rounded-full px-2 text-white bg-blue-300 text-gray-400">
@@ -52,40 +52,40 @@ const Detail = () => {
             </div>
             <div className="flex flex-col border border-blue-300 border-solid border-x-0">
               <div className="flex flex-col">
-                <h2 className="p-4 font-bold font-['Inter']">
+                <h2 className="p-4 font-bold font-['Inter'] lg:text-xl">
                   Job Description/Requirements
                 </h2>
               </div>
               <div className="flex flex-col">
-                <h2 className="mx-4 font-bold text-sm font-['Inter']">
+                <h2 className="mx-4 font-bold text-sm font-['Inter'] lg:text-xl">
                   About Company:
                 </h2>
-                <p className="mx-4 mt-2 text-left text-sm font-['Inter']">
+                <p className="mx-4 mt-2 text-left text-sm font-['Inter'] lg:text-lg">
                   {location.state.detail.about}
                 </p>
               </div>
               <div className="flex flex-col mt-4">
-                <h2 className="mx-4 font-bold text-sm font-['Inter']">
+                <h2 className="mx-4 font-bold text-sm font-['Inter'] lg:text-xl">
                   Responsibilities:
                 </h2>
                 <ul style={{ listStyle: "initial", marginLeft: "2rem" }}>
-                  <li className="mx-4 mt-2 text-left text-sm font-['Inter']">
+                  <li className="mx-4 mt-2 text-left text-sm font-['Inter'] lg:text-lg">
                     {location.state.detail.about}
                   </li>
-                  <li className="mx-4 mt-2 text-left text-sm font-['Inter']">
+                  <li className="mx-4 mt-2 text-left text-sm font-['Inter'] lg:text-lg">
                     {location.state.detail.about}
                   </li>
-                  <li className="mx-4 mt-2 text-left text-sm font-['Inter']">
+                  <li className="mx-4 mt-2 text-left text-sm font-['Inter'] lg:text-lg">
                     {location.state.detail.about}
                   </li>
                 </ul>
               </div>
               <div className="mt-4">
-                <p className="font-bold text-sm font-['Inter'] mx-4">
+                <p className="font-bold text-sm font-['Inter'] mx-4 lg:text-xl">
                   Benefits:
                 </p>
                 <ul style={{ listStyle: "initial", marginLeft: "2rem" }}>
-                  <li className="mx-4 mt-2 text-left text-sm font-['Inter']">
+                  <li className="mx-4 mt-2 text-left text-sm font-['Inter'] lg:text-lg">
                     Gain exposure and build a portfolio with published work on
                     our platforms. Network with entertainment industry
                     enthusiasts, artists, and professionals. Work with tools and
@@ -93,33 +93,33 @@ const Detail = () => {
                     <b>The New York Post</b>, <b>Sony Music </b>and{" "}
                     <b>TechCrunch</b>. Training will be provided.
                   </li>
-                  <li className="mx-4 mt-2 text-left text-sm font-['Inter']">
+                  <li className="mx-4 mt-2 text-left text-sm font-['Inter'] lg:text-lg">
                     Enjoy flexibility in contributing based on your
                     availability.
                   </li>
-                  <li className="mx-4 mt-2 text-left text-sm font-['Inter']">
+                  <li className="mx-4 mt-2 text-left text-sm font-['Inter'] lg:text-lg">
                     Access industry insights, exclusive interviews, and events..
                   </li>
-                  <li className="mx-4 mt-2 text-left text-sm font-['Inter']">
+                  <li className="mx-4 mt-2 text-left text-sm font-['Inter'] lg:text-lg">
                     Enjoy free access to our creative studio facilities based on
                     your contributions.
                   </li>
                 </ul>
               </div>
-              <div className="mt-4 flex">
-                <p className="mx-4"> Job Type: </p>
-                <p className="font-mono text-md ml-3 rounded-full px-2 text-white bg-green-400 text-gray-400">
+              <div className="mt-4 flex lg:mt-6">
+                <p className="mx-4 lg:text-lg lg:mx-6"> Job Type: </p>
+                <p className="font-mono text-md ml-3 rounded-full px-2 text-white bg-green-400 text-gray-400 lg:text-lg lg:ml-[-1rem]">
                   {location.state.detail.type}
                 </p>
               </div>
               <div className="mt-12 flex justify-center items-center mb-6">
-                <button className="rounded-lg py-2 px-28 bg-blue-900 text-white font-['Inter']">
+                <button className="rounded-lg py-2 px-28 bg-blue-900 text-white font-['Inter'] lg:w-[420px] lg:text-lg">
                   Apply Now
                 </button>
               </div>
               <div className="flex flex-col items-start border border-solid border-blue-400 border-x-0 border-b-0">
                 <div className="mt-2 ml-3">
-                  <h1 className="text-xl font-['Mono'] mb-4">
+                  <h1 className="text-xl font-['Inter'] mb-4 font-bold">
                     Important Safety Tips
                   </h1>
                   <ul
@@ -128,11 +128,11 @@ const Detail = () => {
                       marginLeft: "2rem",
                     }}
                   >
-                    <li className="text-sm font-['Inter'] mb-4">
+                    <li className="text-sm font-['Inter'] mb-4 lg:text-md">
                       Do not make any payment without confirming with the
                       Jobberman Customer Support Team.
                     </li>
-                    <li className="text-sm font-['Inter'] mb-4">
+                    <li className="text-sm font-['Inter'] mb-4 lg:text-md">
                       If you think this advert is not genuine, please report it
                       via the Report Job link below.
                     </li>

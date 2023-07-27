@@ -1,6 +1,6 @@
-import { Box, Grid } from "@mui/material";
+import { Alert, Box, Button, Grid, Snackbar } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import LocationOn from "@mui/icons-material/LocationOn";
 import { experimentalStyled as styled } from "@mui/material/styles";
@@ -16,10 +16,20 @@ const Item = styled(Paper)(({ theme }) => ({
   minHeight: "200px",
   borderRadius: "10px",
   marginBottom: "20px",
-  boxShadow: "0 0 10px rgba(0,0,0,0.5)",
+  boxShadow: "0 0 5px rgba(0,0,0,0.5)",
 }));
 
 const Home = () => {
+  const [success, setSuccess] = useState(true);
+  const [open, setOpen] = React.useState(true);
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
   const details = [
     {
       id: 1,
@@ -196,6 +206,43 @@ const Home = () => {
             </Grid>
           ))}
         </Grid>
+        {success && (
+          // <Snackbar
+          //   open={open}
+          //   autoHideDuration={6000}
+          //   onClose={handleClose}
+          //   anchorOrigin={{ vertical: "top", horizontal: "right" }}
+          //   action={
+          //     <Button color="inherit" size="small">
+          //       Profile
+          //     </Button>
+          //   }
+          // >
+          //   <Alert
+          //     onClose={handleClose}
+          //     severity="success"
+          //     sx={{ width: "100%" }}
+          //   >
+          //     Profile
+          //   </Alert>
+          // </Snackbar>
+          <Snackbar
+            open
+            autoHideDuration={6000}
+            message="Archived"
+            anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+            action={
+              <Button
+                color="inherit"
+                size="small"
+                onClick={() => navigate("/profile")}
+              >
+                update your profile
+              </Button>
+            }
+            sx={{ bottom: { xs: 90, sm: 0 } }}
+          />
+        )}
       </Box>
     </div>
   );

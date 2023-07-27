@@ -9,6 +9,9 @@ import Organization from "./pages/Organization";
 import Home from "./pages/Home";
 import Detail from "./pages/Detail";
 import Register from "./pages/Register";
+import OrganizationSignUp from "./pages/OrganizationSignUp";
+import OrganizationHome from "./pages/OrganizationHome";
+import Profile from "./pages/Profile";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -19,10 +22,13 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/signup" element={<Register />} />
+        <Route path="/organization" element={<OrganizationSignUp />} />
         <Route path="/home" element={<Home />} />
         <Route path="/auth" element={<Auth />} />
+        <Route path="/organization_home" element={<OrganizationHome />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/details/:id" element={<Detail />} />
-        <Route path="/organization" element={<Organization />} />
+        <Route path="/login" element={<Organization />} />
       </Routes>
       <Footer />
     </div>

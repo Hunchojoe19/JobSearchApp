@@ -3,13 +3,23 @@ import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { useDispatch } from "react-redux";
 import { saveUser } from "../redux/features/userSlice";
 import { useNavigate } from "react-router-dom";
+import { Alert, Snackbar } from "@mui/material";
 
-const REGISTER_URL = "http://localhost:8080/api/v6/signUp";
 const LOGIN_URL = "http://localhost:8080/api/v6/authorize";
 
 const Auth = () => {
   const navigate = useNavigate();
+  const [success, setSuccess] = useState(true);
+  const [open, setOpen] = React.useState(true);
   const [err, setErr] = useState("");
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   let token;
 
@@ -137,6 +147,27 @@ const Auth = () => {
             </p>
           </div>
         </div>
+        {success ? (
+          <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+            <Alert
+              onClose={handleClose}
+              severity="success"
+              sx={{ width: "100%" }}
+            >
+              Login Successful
+            </Alert>
+          </Snackbar>
+        ) : (
+          <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+            <Alert
+              onClose={handleClose}
+              severity="error"
+              sx={{ width: "100%" }}
+            >
+              Login UnSuccessful
+            </Alert>
+          </Snackbar>
+        )}
       </div>
     </section>
   );

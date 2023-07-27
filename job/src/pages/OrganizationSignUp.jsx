@@ -1,23 +1,21 @@
 import React, { useState } from "react";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
-import { useDispatch } from "react-redux";
-import { saveUser } from "../redux/features/userSlice";
+import { TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-const REGISTER_URL = "http://localhost:8080/api/v6/signUp";
+const REGISTER_URL = "http://localhost:8080/api/v6/recruiter-signUp";
 
-const Register = () => {
+const OrganizationSignUp = () => {
   const navigate = useNavigate();
   const [err, setErr] = useState("");
-
   const [formValues, setFormValues] = useState({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
+    organizationName: "",
     phoneNo: " ",
   });
-
   const register = {
     firstName: formValues.firstName,
     lastName: formValues.lastName,
@@ -51,7 +49,6 @@ const Register = () => {
         .catch((err) => console.log(err));
     }
   };
-
   return (
     <section id="auth">
       <div className="container mx-auto md:h-[79vh] lg:h-[130vh]">
@@ -59,7 +56,6 @@ const Register = () => {
           <div className="text-center flex justify-center items-center">
             <h1 className="text-5xl text-blue-400 mt-12">Welcome</h1>
           </div>
-
           <div className="flex flex-col justify-center items-center mt-24">
             <ValidatorForm
               style={{
@@ -99,6 +95,24 @@ const Register = () => {
                   setFormValues({
                     ...formValues,
                     lastName: e.target.value,
+                  })
+                }
+                validators={["required"]}
+                errorMessages={["this field is required"]}
+              />
+              <TextValidator
+                sx={{
+                  marginTop: "2rem",
+                  width: "350px",
+                }}
+                id="organizationName"
+                label="Organization Name"
+                variant="outlined"
+                value={formValues.organizationName}
+                onChange={(e) =>
+                  setFormValues({
+                    ...formValues,
+                    organizationName: e.target.value,
                   })
                 }
                 validators={["required"]}
@@ -172,22 +186,24 @@ const Register = () => {
               </button>
             </ValidatorForm>
           </div>
-        </div>
-        <div>
-          <div className="text-center justify-content-center mt-2 pt-2">
-            <p className="small font-bold mt-2 pt-1">
-              Already have an account ?&nbsp;
-              <span
-                style={{
-                  textDecoration: "none",
-                  cursor: "pointer",
-                  color: "goldenrod",
-                }}
-                onClick={() => navigate("/auth")}
-              >
-                Sign In
-              </span>
-            </p>
+          <div>
+            <>
+              <div className="text-center justify-content-center mt-2 pt-2">
+                <p className="small font-bold mt-2 pt-1 mb-4">
+                  Already have an account ?&nbsp;
+                  <span
+                    style={{
+                      textDecoration: "none",
+                      cursor: "pointer",
+                      color: "goldenrod",
+                    }}
+                    onClick={() => navigate("/login")}
+                  >
+                    Sign In
+                  </span>
+                </p>
+              </div>
+            </>
           </div>
         </div>
       </div>
@@ -195,4 +211,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default OrganizationSignUp;

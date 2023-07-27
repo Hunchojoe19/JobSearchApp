@@ -17,7 +17,7 @@ const Navbar = () => {
           <a href="/jobs" className="hover:text-darkGrayishBlue">
             Search Jobs
           </a>
-          <a href="/organization" className="hover:text-darkGrayishBlue">
+          <a href="/login" className="hover:text-darkGrayishBlue">
             Recruiting?
           </a>
           {/* <a href="" className="hover:text-darkGrayishBlue">
@@ -57,7 +57,7 @@ const Navbar = () => {
           <a href="" className="hover:text-darkGrayishBlue">
             Search Jobs
           </a>
-          <a href="/organization" className="hover:text-darkGrayishBlue">
+          <a href="/login" className="hover:text-darkGrayishBlue">
             Recruiting?
           </a>
           <a href="/auth" className="hover:text-darkGrayishBlue">

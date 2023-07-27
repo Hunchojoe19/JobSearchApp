@@ -25,7 +25,7 @@ export default {
       serif: ["ui-serif", "Georgia"],
       mono: ["ui-monospace", "SFMono-Regular"],
       display: ["Oswald"],
-      body: ['"Open Sans", "Inter", "Dancing Script"'],
+      body: ['"Open Sans", "Inter", "Dancing Script", "Roboto", "Bebas Neue",'],
     },
   },
   plugins: [],
