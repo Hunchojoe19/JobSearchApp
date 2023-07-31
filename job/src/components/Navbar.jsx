@@ -26,7 +26,7 @@ const Navbar = () => {
         </div>
         <a
           href="/auth"
-          className="hidden md:block p-3 px-6 pt-2 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight"
+          className="hidden md:block p-3 px-6 pt-2 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight lg:px-12 lg:text-lg"
         >
           Job ?
         </a>

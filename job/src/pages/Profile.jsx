@@ -77,7 +77,7 @@ const Profile = () => {
   }
   const date = new Date();
   const formatedDate =
-    date.getDay() +
+    date.getDate() +
     "-" +
     getMonthName(String(date.getMonth())) +
     "-" +
@@ -319,8 +319,8 @@ const Profile = () => {
                           />
                         </DemoContainer>
                       </div>
-                      <div className="mt-4 flex justify-center items-center">
-                        <button className="bg-blue-500 text-white text-md font-['Roboto'] text-center px-12 py-2 rounded-lg md:px-24 md:py-4 md:text-2xl lg:text-xl lg:py-2 lg:px-16">
+                      <div className="mt-16 flex justify-center items-center">
+                        <button className="bg-blue-500 text-white text-md font-['Roboto'] hover:bg-blue-300 text-center px-12 py-2 rounded-lg md:px-24 md:py-4 md:text-2xl lg:text-xl lg:py-2 lg:px-16">
                           Save
                         </button>
                       </div>

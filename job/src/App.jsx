@@ -14,8 +14,6 @@ import OrganizationHome from "./pages/OrganizationHome";
 import Profile from "./pages/Profile";
 
 function App() {
-  const [user, setUser] = useState(null);
-  useEffect(() => {}, []);
   return (
     <div className="w-full">
       <Navbar />

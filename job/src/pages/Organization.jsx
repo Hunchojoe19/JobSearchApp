@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { saveUser } from "../redux/features/userSlice";
 
 const LOGIN_URL = "http://localhost:8080/api/v6/authorize";
 const Organization = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState({
     email: "",
