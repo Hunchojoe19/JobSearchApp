@@ -6,6 +6,7 @@ import LocationOn from "@mui/icons-material/LocationOn";
 import { experimentalStyled as styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import { excerpt } from "../utilities";
+import jobnotfound from "../assets/jobnotfound.png";
 import { useDispatch, useSelector } from "react-redux";
 import { saveUser } from "../redux/features/userSlice";
 
@@ -226,58 +227,66 @@ const Home = () => {
           spacing={{ xs: 2, md: 3 }}
           columns={{ xs: 4, sm: 8, md: 12 }}
         >
-          {jobs.length
-            ? Array.from(jobs).map((detail, id) => (
-                <Grid item xs={12} sm={12} md={4} key={id}>
-                  <Item>
-                    <div className="flex flex-col justify-center items-start">
-                      <h1 className="text-2xl font-bold font-['mono'] md:text-4xl lg:text-3xl">
-                        {detail.name}
-                      </h1>
-                      <p className="font-['Inter'] font-bold mt-2 md:text-xl lg:text-sm">
-                        {detail.company} - {detail.location}
+          {jobs.length ? (
+            Array.from(jobs).map((detail, id) => (
+              <Grid item xs={12} sm={12} md={4} key={id}>
+                <Item>
+                  <div className="flex flex-col justify-center items-start">
+                    <h1 className="text-2xl font-bold font-['mono'] md:text-4xl lg:text-3xl">
+                      {detail.name}
+                    </h1>
+                    <p className="font-['Inter'] font-bold mt-2 md:text-xl lg:text-sm">
+                      {detail.company} - {detail.location}
+                    </p>
+                    <p className="mt-2 md:text-2xl lg:text-base">
+                      Experience: {detail.experience}
+                    </p>
+                    <div className="flex justify-between items-center mt-2">
+                      <p className="bg-green-300 p-2 rounded-full text-white md:text-xl lg:text-sm">
+                        {detail.period}
                       </p>
-                      <p className="mt-2 md:text-2xl lg:text-base">
-                        Experience: {detail.experience}
+                      <p className="bg-blue-300 p-2 rounded-full ml-2 text-white md:text-xl lg:text-sm">
+                        {detail.type}
                       </p>
-                      <div className="flex justify-between items-center mt-2">
-                        <p className="bg-green-300 p-2 rounded-full text-white md:text-xl lg:text-sm">
-                          {detail.period}
-                        </p>
-                        <p className="bg-blue-300 p-2 rounded-full ml-2 text-white md:text-xl lg:text-sm">
-                          {detail.type}
-                        </p>
-                      </div>
-                      <span className="font-bold mt-2 md:text-xl lg:text-sm">
-                        skills: {detail.skills}
-                      </span>
-                      <p className="font-bold mt-2 md:text-xl lg:text-base">
-                        Description:
-                      </p>
-                      <div className="flex justify-start mb-2 md:text-xl lg:text-sm">
-                        <p className="text-left ml-4">
-                          {excerpt(detail.description, 100)}
-                        </p>
-                      </div>
-                      <button
-                        className="bg-gray-500 w-24 p-2 rounded-full text-white md:w-28"
-                        onClick={() =>
-                          navigate(`/details/${detail.id}`, {
-                            state: { detail },
-                          })
-                        }
-                      >
-                        Read More
-                      </button>
-
-                      <i className="mt-2 text-gray-400">
-                        Posted: {detail.time}
-                      </i>
                     </div>
-                  </Item>
-                </Grid>
-              ))
-            : "No job found"}
+                    <span className="font-bold mt-2 md:text-xl lg:text-sm">
+                      skills: {detail.skills}
+                    </span>
+                    <p className="font-bold mt-2 md:text-xl lg:text-base">
+                      Description:
+                    </p>
+                    <div className="flex justify-start mb-2 md:text-xl lg:text-sm">
+                      <p className="text-left ml-4">
+                        {excerpt(detail.description, 100)}
+                      </p>
+                    </div>
+                    <button
+                      className="bg-gray-500 w-24 p-2 rounded-full text-white md:w-28"
+                      onClick={() =>
+                        navigate(`/details/${detail.id}`, {
+                          state: { detail },
+                        })
+                      }
+                    >
+                      Read More
+                    </button>
+
+                    <i className="mt-2 text-gray-400">Posted: {detail.time}</i>
+                  </div>
+                </Item>
+              </Grid>
+            ))
+          ) : (
+            <div className="mt-12 flex justify-center items-center">
+              <img
+                src={jobnotfound}
+                className="h-32 md:h-96 md:flex md:justify-center"
+              />
+              <p className="font-['Mono'] font-bold md:text-6xl">
+                No Job Found!!!
+              </p>
+            </div>
+          )}
         </Grid>
         {success && experience <= 0 && education <= 0 && (
           // <Snackbar
