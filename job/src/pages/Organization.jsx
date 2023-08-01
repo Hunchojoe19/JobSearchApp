@@ -31,7 +31,12 @@ const Organization = () => {
         console.log("res ", response.status);
         console.log("res ", response.headers["X-Access-Token"]);
         if (response.status === 204) {
-          dispatch(saveUser(loginDetails));
+          dispatch(
+            saveUser({
+              ...loginDetails,
+              token: response.headers.get("X-Access-Token"),
+            })
+          );
           navigate("/organization_home");
         } else if (response.status === 400) {
           navigate("/login");

@@ -60,7 +60,7 @@ const OrganizationSignUp = () => {
   };
   return (
     <section id="auth">
-      <div className="container mx-auto md:h-[79vh] lg:h-[130vh]">
+      <div className="container mx-auto ">
         <div className="flex flex-col justify-center items-center">
           <div className="text-center flex justify-center items-center">
             <h1 className="text-5xl text-blue-400 mt-12">Welcome</h1>
@@ -93,7 +93,7 @@ const OrganizationSignUp = () => {
               />
               <TextValidator
                 sx={{
-                  marginTop: "2rem",
+                  marginTop: "3rem",
                   width: "350px",
                 }}
                 id="lastName"
@@ -111,7 +111,7 @@ const OrganizationSignUp = () => {
               />
               <TextValidator
                 sx={{
-                  marginTop: "2rem",
+                  marginTop: "3rem",
                   width: "350px",
                 }}
                 id="organizationName"
@@ -130,7 +130,7 @@ const OrganizationSignUp = () => {
 
               <TextValidator
                 sx={{
-                  marginTop: "2rem",
+                  marginTop: "3rem",
                   width: "350px",
                 }}
                 label="Email"
@@ -147,7 +147,7 @@ const OrganizationSignUp = () => {
               />
               <TextValidator
                 sx={{
-                  marginTop: "2rem",
+                  marginTop: "3rem",
                   width: "350px",
                 }}
                 id="password"
@@ -173,7 +173,7 @@ const OrganizationSignUp = () => {
               />
               <TextValidator
                 sx={{
-                  marginTop: "2rem",
+                  marginTop: "3rem",
                   width: "350px",
                 }}
                 id="phoneNo"
@@ -192,7 +192,7 @@ const OrganizationSignUp = () => {
               />
               <TextValidator
                 sx={{
-                  marginTop: "2rem",
+                  marginTop: "3rem",
                   width: "350px",
                 }}
                 id="location"
@@ -212,7 +212,7 @@ const OrganizationSignUp = () => {
               <div className="flex justify-center items-center">
                 <TextValidator
                   sx={{
-                    marginTop: "2rem",
+                    marginTop: "3rem",
                     width: "230px",
                   }}
                   id="industry"
@@ -231,7 +231,7 @@ const OrganizationSignUp = () => {
                 />
                 <TextValidator
                   sx={{
-                    marginTop: "2rem",
+                    marginTop: "3rem",
                     width: "100px",
                     marginLeft: ".5rem",
                   }}

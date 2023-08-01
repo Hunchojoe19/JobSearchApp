@@ -55,7 +55,10 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 const Profile = () => {
   const [file, setFile] = useState(null);
   const [expanded, setExpanded] = React.useState("panel1");
-  const [value, setValue] = React.useState(null);
+  const [value, setValue] = React.useState({
+    startvalue: null,
+    endvalue: null,
+  });
   const [formValues, setFormValues] = useState({
     tags: [],
   });
@@ -303,7 +306,7 @@ const Profile = () => {
                         </p>
                         <DemoContainer components={["DatePicker"]}>
                           <DatePicker
-                            value={value}
+                            value={value.startvalue}
                             onChange={(newValue) => setValue(newValue)}
                           />
                         </DemoContainer>
@@ -314,7 +317,7 @@ const Profile = () => {
                         </p>
                         <DemoContainer components={["DatePicker"]}>
                           <DatePicker
-                            value={value}
+                            value={value.endvalue}
                             onChange={(newValue) => setValue(newValue)}
                           />
                         </DemoContainer>

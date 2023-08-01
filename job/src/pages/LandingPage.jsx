@@ -24,7 +24,7 @@ const LandingPage = () => {
         <div className="flex flex-col text-center justify-center items-center md:w-1/2">
           <div className="flex flex-col items-center">
             <h1 className="text-4xl mt-6 font-['Inter'] font-bold text-brightRedLight md:text-5xl xl:text-6xl">
-              Hire The Best Person within 24 Hours
+              Hire The Best Intern within 24 Hours
             </h1>
             <p className="font-sans text-center font-light mt-6 md:text-2xl xl:mt-10 lg:text-3xl">
               Receive carefully screened terms from remote developers that best
