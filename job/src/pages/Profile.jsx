@@ -13,6 +13,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import pdf from "../assets/pdf.png";
+import { useSelector } from "react-redux";
 
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
@@ -63,6 +64,13 @@ const Profile = () => {
     tags: [],
   });
 
+  const { userDetails: select } = useSelector((state) => state);
+  console.log("user details ", select.details);
+  const email = select?.details?.email;
+  const phone = select?.details?.phoneNo;
+  const firstName = select?.details?.firstName;
+  const lastName = select?.details?.lastName;
+
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
@@ -94,38 +102,37 @@ const Profile = () => {
             <div className="flex flex-col justify-center items-center md:mt-12">
               <div className="flex justify-between items-center">
                 <h1 className="text-2xl text-left font-['Roboto'] font-bold ml-[-2rem] md:text-5xl lg:text-4xl lg:ml-[-2rem]">
-                  Enubiak Joseph
+                  {firstName + " " + lastName}
                 </h1>
                 <div className="w-[70px] h-[70px] rounded-[50%] bg-gray-600 ml-8 md:w-[80px] md:h-[80px] lg:w-[60px] lg:h-[60px] lg:ml-[14rem]">
                   <p className="text-white text-4xl flex items-center mt-3 justify-center md:text-5xl lg:text-4xl">
-                    EJ
+                    {firstName?.charAt(0).toUpperCase() +
+                      lastName?.charAt(0).toUpperCase()}
                   </p>
                 </div>
               </div>
               <div className="rounded-xl w-[360px] h-[150px] bg-neutral-200 mt-4 md:w-[600px] md:h-[200px] lg:h-[180px]">
-                <div className="flex justify-start items-center ml-6 mt-4 md:hidden ">
+                <div className="flex justify-start items-center ml-6 mt-8 md:hidden ">
                   <MailIcon fontSize="small" sx={{ fill: "gray" }} />
-                  <p className="text-base ml-3 text-gray-500">
-                    enubiakjoseph@gmail.com
-                  </p>
+                  <p className="text-base ml-3 text-gray-500">{email}</p>
                 </div>
-                <div className="sm:hidden md:flex justify-start md:items-center md:ml-6 mt-4">
+                <div className="sm:hidden md:flex justify-start md:items-center md:ml-6 mt-8">
                   <MailIcon fontSize="medium" sx={{ fill: "gray" }} />
                   <p className="text-base ml-3 text-gray-500 md:text-2xl lg:text-xl">
-                    enubiakjoseph@gmail.com
+                    {email}
                   </p>
                 </div>
-                <div className="flex justify-start items-center ml-6 mt-4 md:hidden">
+                <div className="flex justify-start items-center ml-6 mt-8 md:hidden">
                   <LocalPhoneIcon fontSize="small" sx={{ fill: "gray" }} />
-                  <p className="text-base ml-3 text-gray-500">+2348102661150</p>
+                  <p className="text-base ml-3 text-gray-500">{phone}</p>
                 </div>
-                <div className="sm:hidden md:flex md:justify-start md:items-center md:ml-6 md:mt-6">
+                <div className="sm:hidden md:flex md:justify-start md:items-center md:ml-6 md:mt-8">
                   <LocalPhoneIcon fontSize="medium" sx={{ fill: "gray" }} />
                   <p className="text-base ml-3 text-gray-500 md:text-2xl lg:text-xl">
-                    +2348102661150
+                    {phone}
                   </p>
                 </div>
-                <div className="flex justify-start items-center ml-6 mt-4 md:hidden">
+                {/* <div className="flex justify-start items-center ml-6 mt-4 md:hidden">
                   <PlaceIcon fontSize="small" sx={{ fill: "gray" }} />
                   <p className="text-base ml-3 text-gray-500">Lagos.</p>
                 </div>
@@ -134,7 +141,7 @@ const Profile = () => {
                   <p className="text-base ml-3 text-gray-500 md:text-2xl lg:text-xl">
                     Lagos.
                   </p>
-                </div>
+                </div> */}
               </div>
               <div className="mt-4 text-2xl text-left">
                 <p className="font-bold text-left ml-[-10rem] font-['Roboto'] md:text-4xl md:mt-6 md:ml-[-15rem] lg:text-2xl lg:ml-[-18rem]">

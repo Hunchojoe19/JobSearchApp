@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import logo from "../assets/logo.png";
 import { useSelector } from "react-redux";
-import { Avatar, Badge } from "@mui/material";
+import { Avatar, Badge, Menu, MenuItem } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { useNavigate } from "react-router-dom";
+import PermIdentityIcon from "@mui/icons-material/PermIdentity";
+import SettingsIcon from "@mui/icons-material/Settings";
+import LogoutIcon from "@mui/icons-material/Logout";
+import userSlice from "../redux/features/userSlice";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -35,11 +40,29 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 const Navbar = () => {
   const [open, setOpen] = React.useState("");
+  const [user, setUser] = React.useState(null);
 
   const { userDetails: select } = useSelector((state) => state);
   console.log("selkect ", select);
   const username = select.details.username;
   const email = select.details.email;
+
+  useEffect(() => {
+    if (username) {
+      setUser(username);
+    }
+  }, []);
+
+  const navigate = useNavigate();
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const opened = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <nav className="relative container mx-auto p-6 ">
@@ -85,7 +108,55 @@ const Navbar = () => {
               variant="dot"
               marginLeft="2rem"
             >
-              <Avatar src="/broken-image.jpg" sx={{ marginLeft: "1rem" }} />
+              <Avatar
+                src="/broken-image.jpg"
+                sx={{ marginLeft: "1rem", cursor: "pointer" }}
+                onClick={handleClick}
+              />
+              <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={opened}
+                onClose={handleClose}
+                MenuListProps={{
+                  "aria-labelledby": "basic-button",
+                }}
+              >
+                <MenuItem onClick={() => navigate("/profile")}>
+                  <div className="flex justify-center items-center">
+                    <PermIdentityIcon
+                      fontSize="medium"
+                      sx={{ marginRight: "0.5rem" }}
+                    />
+                    <p className="flex justify-center items-center font-bold">
+                      Profile
+                    </p>
+                  </div>
+                </MenuItem>
+
+                <MenuItem onClick={() => navigate("/settings")}>
+                  <div className="flex justify-center items-center">
+                    <SettingsIcon
+                      fontSize="medium"
+                      sx={{ marginRight: "0.5rem" }}
+                    />
+                    <p className="flex justify-center items-center font-bold">
+                      Settings
+                    </p>
+                  </div>
+                </MenuItem>
+                <MenuItem onClick={() => navigate("/auth")}>
+                  <div className="flex justify-center items-center">
+                    <LogoutIcon
+                      fontSize="medium"
+                      sx={{ marginRight: "0.5rem" }}
+                    />
+                    <p className="flex justify-center items-center font-bold">
+                      Logout
+                    </p>
+                  </div>
+                </MenuItem>
+              </Menu>
             </StyledBadge>
 
             <div className="ml-4">
