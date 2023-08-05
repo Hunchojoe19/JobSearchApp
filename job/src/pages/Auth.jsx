@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { saveUser } from "../redux/features/userSlice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Alert, Snackbar } from "@mui/material";
 
 const LOGIN_URL = "http://localhost:8080/api/v6/authorize";
@@ -22,6 +22,12 @@ const Auth = () => {
   };
 
   let token;
+
+  const location = useLocation();
+  // const from = location.state?.from?.pathname || "/";
+
+  const { userDetails: select } = useSelector((state) => state);
+  console.log("user details ", select.details);
 
   const [formValues, setFormValues] = useState({
     email: "",
@@ -53,6 +59,11 @@ const Auth = () => {
         // console.log("res ", response.headers["X-Access-Token"]);
         if (response.status === 204) {
           dispatch(saveUser({ ...loginDetails, token }));
+          localStorage.setItem(
+            "user",
+            JSON.stringify({ ...loginDetails, token })
+          );
+          setFormValues("");
           navigate("/home");
         } else if (response.status === 400) {
           navigate("/auth");
@@ -152,7 +163,7 @@ const Auth = () => {
             </p>
           </div>
         </div>
-        {success ? (
+        {/* {success ? (
           <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
             <Alert
               onClose={handleClose}
@@ -172,7 +183,7 @@ const Auth = () => {
               Login UnSuccessful
             </Alert>
           </Snackbar>
-        )}
+        )} */}
       </div>
     </section>
   );

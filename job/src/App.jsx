@@ -12,21 +12,53 @@ import Register from "./pages/Register";
 import OrganizationSignUp from "./pages/OrganizationSignUp";
 import OrganizationHome from "./pages/OrganizationHome";
 import Profile from "./pages/Profile";
+import Layout from "./components/Layout";
+import RequireAuthUser from "./components/RequireAuthUser";
+import RequireAuthOrg from "./components/RequireAuthOrg";
+import Settings from "./pages/Settings";
+import { useDispatch } from "react-redux";
+import { saveUser } from "./redux/features/userSlice";
+import ApplicationSuccess from "./pages/ApplicationSuccess";
+import JobSuccess from "./pages/JobSuccess";
+import HomePage from "./pages/HomePage";
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+
+    if (!user) return;
+
+    dispatch(saveUser(JSON.parse(user)));
+  }, []);
   return (
     <div className="w-full">
       <Navbar />
       <Routes>
-        <Route path="/" element={<LandingPage />} />
+        <Route path="/" element={<Layout />} />
+        {/* public routes */}
+        <Route exact path="/landing" element={<LandingPage />} />
         <Route path="/signup" element={<Register />} />
         <Route path="/organization" element={<OrganizationSignUp />} />
-        <Route path="/home" element={<Home />} />
         <Route path="/auth" element={<Auth />} />
-        <Route path="/organization_home" element={<OrganizationHome />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/details/:id" element={<Detail />} />
         <Route path="/login" element={<Organization />} />
+        {/* protected routes */}
+        <Route element={<RequireAuthUser />}>
+          <Route path="/home" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/details/:id" element={<Detail />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/success" element={<ApplicationSuccess />} />
+        </Route>
+
+        {/* protected routes organization */}
+        <Route element={<RequireAuthOrg />}>
+          <Route path="/organization_home" element={<OrganizationHome />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/job_success" element={<JobSuccess />} />
+          <Route path="/homepage" element={<HomePage />} />
+        </Route>
       </Routes>
       <Footer />
     </div>

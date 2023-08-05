@@ -9,6 +9,7 @@ import { TextField } from "@mui/material";
 import dayjs from "dayjs";
 import { useDispatch, useSelector } from "react-redux";
 import { saveUser } from "../redux/features/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const GET_USER = "http://localhost:8080/api/v6/userDetails";
 const POST_JOB = "http://localhost:8080/api/job/create";
@@ -24,19 +25,22 @@ const OrganizationHome = () => {
 
   const [user, setUser] = useState({});
 
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
 
   const { userDetails: select } = useSelector((state) => state);
 
-  console.log("user details ", select.details);
-  const token = select.details.token;
+  console.log("user details ", select?.details);
+  console.log("token ", select?.details?.token);
+  const token = select?.details?.token;
 
   const postData = {
     title: createJobValues.title,
     description: createJobValues.description,
     location: createJobValues.location.toUpperCase(),
     type: createJobValues.type.toUpperCase(),
-    endDate: value.format("YYYY-MM-DD"),
+    endDate: value?.format("YYYY-MM-DD"),
     status: "ACTIVE",
   };
 
@@ -68,7 +72,13 @@ const OrganizationHome = () => {
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(Object(postData)),
-    }).then((res) => res.json().then((data) => console.log(data)));
+    }).then((res) => {
+      if (res.status === 201) {
+        console.log("job created successfully");
+        navigate("/job_success");
+      }
+    });
+    // console.log("post data ", postData);
   };
 
   console.log("first name ", user?.data?.firstName);

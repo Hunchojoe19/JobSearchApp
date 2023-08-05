@@ -3,7 +3,7 @@ import logo from "../assets/logo.png";
 import { useSelector } from "react-redux";
 import { Avatar, Badge, Menu, MenuItem } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -43,15 +43,13 @@ const Navbar = () => {
   const [user, setUser] = React.useState(null);
 
   const { userDetails: select } = useSelector((state) => state);
-  console.log("selkect ", select);
+  console.log("select ", select);
   const username = select.details.username;
-  const email = select.details.email;
 
-  useEffect(() => {
-    if (username) {
-      setUser(username);
-    }
-  }, []);
+  localStorage.setItem("user", JSON.stringify({ ...select.details }));
+  const users = localStorage.getItem("user");
+  const { token } = JSON.parse(users);
+  const email = select.details.email;
 
   const navigate = useNavigate();
 
@@ -70,37 +68,37 @@ const Navbar = () => {
         <div className="pt-2 w-64 h-4 flex justify-center items-center">
           <img src={logo} alt="logo" />
         </div>
-        {!username && (
+        {!token && (
           <div className="hidden md:flex md:space-x-10 md:justify-center md:items-center">
             <div className="hidden md:flex space-x-10 text-1.5xl font-['Inter'] md:mt-4 md:mr-12">
-              <a href="/home" className="hover:text-darkGrayishBlue">
+              <Link to="/home" className="hover:text-darkGrayishBlue">
                 Home
-              </a>
-              <a href="/jobs" className="hover:text-darkGrayishBlue">
+              </Link>
+              <Link to="/jobs" className="hover:text-darkGrayishBlue">
                 Search Jobs
-              </a>
-              <a href="/login" className="hover:text-darkGrayishBlue">
+              </Link>
+              <Link to="/login" className="hover:text-darkGrayishBlue">
                 Recruiting?
-              </a>
+              </Link>
             </div>
-            <a
-              href="/auth"
+            <Link
+              to="/auth"
               className="hidden md:block p-3 px-6 pt-2 text-white bg-brightRed rounded-full baseline hover:bg-brightRedLight lg:px-12 lg:text-lg"
             >
               Job ?
-            </a>
+            </Link>
           </div>
         )}
 
-        {username && (
+        {token && (
           <div className="hidden md:flex justify-center items-center">
             <div className="hidden md:flex space-x-10 text-1.5xl mr-12 font-['Inter']">
-              <a href="/home" className="hover:text-darkGrayishBlue">
+              <Link to="/home" className="hover:text-darkGrayishBlue">
                 Home
-              </a>
-              <a href="/jobs" className="hover:text-darkGrayishBlue">
+              </Link>
+              <Link to="/jobs" className="hover:text-darkGrayishBlue">
                 Search Jobs
-              </a>
+              </Link>
             </div>
             <StyledBadge
               overlap="circular"
@@ -167,7 +165,7 @@ const Navbar = () => {
             </div>
             <div className="ml-24">
               <a
-                href="/auth"
+                href="/landing"
                 className="px-12 py-4 bg-blue-600 rounded-full text-white font-bold font-['Inter'] hover:bg-blue-400"
               >
                 Logout
@@ -190,25 +188,103 @@ const Navbar = () => {
         </button>
       </div>
       <div className="md:hidden">
-        <div
-          id="menu"
-          className={`${
-            open ? "" : "hidden"
-          } flex flex-col items-center self-end py-8 mt-10 space-y-6 font-bold bg-white sm:w-auto sm:self-center left-6 right-6 drop-shadow-md`}
-        >
-          <a href="/home" className="hover:text-darkGrayishBlue">
-            Home
-          </a>
-          <a href="" className="hover:text-darkGrayishBlue">
-            Search Jobs
-          </a>
-          <a href="/login" className="hover:text-darkGrayishBlue">
-            Recruiting?
-          </a>
-          <a href="/auth" className="hover:text-darkGrayishBlue">
-            Looking For Job?
-          </a>
-        </div>
+        {token && (
+          <div
+            id="menu"
+            className={`${
+              open ? "" : "hidden"
+            } flex flex-col items-center self-end py-8 mt-10 space-y-6 font-bold bg-white sm:w-auto sm:self-center left-6 right-6 drop-shadow-md`}
+          >
+            <Link to="/home" className="hover:text-darkGrayishBlue">
+              Home
+            </Link>
+            <Link to="" className="hover:text-darkGrayishBlue">
+              Search Jobs
+            </Link>
+            <div className="mt-4 flex flex-column justify-center items-center">
+              <StyledBadge
+                overlap="circular"
+                anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                variant="dot"
+                marginLeft="2rem"
+              >
+                <Avatar
+                  src="/broken-image.jpg"
+                  sx={{ marginLeft: "1rem", cursor: "pointer" }}
+                  onClick={handleClick}
+                />
+                <Menu
+                  id="basic-menu"
+                  anchorEl={anchorEl}
+                  open={opened}
+                  onClose={handleClose}
+                  MenuListProps={{
+                    "aria-labelledby": "basic-button",
+                  }}
+                >
+                  <MenuItem onClick={() => navigate("/profile")}>
+                    <div className="flex justify-center items-center">
+                      <PermIdentityIcon
+                        fontSize="medium"
+                        sx={{ marginRight: "0.5rem" }}
+                      />
+                      <p className="flex justify-center items-center font-bold">
+                        Profile
+                      </p>
+                    </div>
+                  </MenuItem>
+
+                  <MenuItem onClick={() => navigate("/settings")}>
+                    <div className="flex justify-center items-center">
+                      <SettingsIcon
+                        fontSize="medium"
+                        sx={{ marginRight: "0.5rem" }}
+                      />
+                      <p className="flex justify-center items-center font-bold">
+                        Settings
+                      </p>
+                    </div>
+                  </MenuItem>
+                  <MenuItem onClick={() => navigate("/auth")}>
+                    <div className="flex justify-center items-center">
+                      <LogoutIcon
+                        fontSize="medium"
+                        sx={{ marginRight: "0.5rem" }}
+                      />
+                      <p className="flex justify-center items-center font-bold">
+                        Logout
+                      </p>
+                    </div>
+                  </MenuItem>
+                </Menu>
+              </StyledBadge>
+            </div>
+
+            <p className="ml-2">{email}</p>
+            <a href="/landing">Logout</a>
+          </div>
+        )}
+        {!token && (
+          <div
+            id="menu"
+            className={`${
+              open ? "" : "hidden"
+            } flex flex-col items-center self-end py-8 mt-10 space-y-6 font-bold bg-white sm:w-auto sm:self-center left-6 right-6 drop-shadow-md`}
+          >
+            <Link to="/home" className="hover:text-darkGrayishBlue">
+              Home
+            </Link>
+            <Link to="" className="hover:text-darkGrayishBlue">
+              Search Jobs
+            </Link>
+            <Link to="/login" className="hover:text-darkGrayishBlue">
+              Recruiting?
+            </Link>
+            <Link to="/auth" className="hover:text-darkGrayishBlue">
+              Looking For Job?
+            </Link>
+          </div>
+        )}
       </div>
     </nav>
   );

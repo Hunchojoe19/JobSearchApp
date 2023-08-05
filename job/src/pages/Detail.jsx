@@ -2,11 +2,13 @@ import { Grid } from "@mui/material";
 import FlagIcon from "@mui/icons-material/Flag";
 import React from "react";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 const Detail = () => {
   const { id } = useParams();
   const location = useLocation();
+
+  const navigate = useNavigate();
 
   console.log(location.state);
 
@@ -113,7 +115,12 @@ const Detail = () => {
                 </p>
               </div>
               <div className="mt-12 flex justify-center items-center mb-6">
-                <button className="rounded-lg py-2 px-28 bg-blue-900 text-white font-['Inter'] lg:w-[420px] lg:text-lg">
+                <button
+                  className="rounded-lg py-2 px-28 bg-blue-900 text-white font-['Inter'] lg:w-[420px] lg:text-lg"
+                  onClick={() =>
+                    navigate("/success", { state: location.state })
+                  }
+                >
                   Apply Now
                 </button>
               </div>
