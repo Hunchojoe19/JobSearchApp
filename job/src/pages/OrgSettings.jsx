@@ -3,7 +3,7 @@ import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-const Settings = () => {
+const OrgSettings = () => {
   const [edit, setEdit] = useState(false);
   const { userDetails: select } = useSelector((state) => state);
   const [settingValue, setSettingsValue] = useState({
@@ -13,9 +13,6 @@ const Settings = () => {
     phoneNo: select?.details?.phoneNo,
   });
 
-  const handleChange = (e) => {
-    setSettingsValue({ ...settingValue, [e.target.name]: e.target.value });
-  };
   return (
     <div className="container mx-auto">
       <div className="lg:flex lg:flex-column lg:items-center"></div>
@@ -70,12 +67,7 @@ const Settings = () => {
               value={select?.details?.phoneNo}
             />
           </div>
-          <div className="mt-6 flex justify-start items-center md:mt-8">
-            <BusinessCenterIcon fontSize="medium" />
-            <Link to="/applied_jobs" className="ml-4 text-lg text-gray-400">
-              My Jobs
-            </Link>
-          </div>
+
           <div className="mt-16 mb-6 md:mb-24 lg:flex lg:flex-column lg:items-center lg:justify-center">
             <button
               className="px-16 py-2 rounded-lg text-lg font-['Inter'] text-white bg-blue-500 ml-24 md:w-[400px] md:h-[70px] md:text-2xl"
@@ -153,4 +145,4 @@ const Settings = () => {
   );
 };
 
-export default Settings;
+export default OrgSettings;

@@ -21,6 +21,8 @@ import { saveUser } from "./redux/features/userSlice";
 import ApplicationSuccess from "./pages/ApplicationSuccess";
 import JobSuccess from "./pages/JobSuccess";
 import HomePage from "./pages/HomePage";
+import MyJob from "./pages/MyJob";
+import OrgSettings from "./pages/OrgSettings";
 
 function App() {
   const dispatch = useDispatch();
@@ -41,6 +43,7 @@ function App() {
         <Route path="/signup" element={<Register />} />
         <Route path="/organization" element={<OrganizationSignUp />} />
         <Route path="/auth" element={<Auth />} />
+        <Route path="/applied_jobs" element={<MyJob />} />
         <Route path="/login" element={<Organization />} />
         {/* protected routes */}
         <Route element={<RequireAuthUser />}>
@@ -57,6 +60,7 @@ function App() {
           <Route path="/settings" element={<Settings />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/job_success" element={<JobSuccess />} />
+          <Route path="/setting" element={<OrgSettings />} />
           <Route path="/homepage" element={<HomePage />} />
         </Route>
       </Routes>
