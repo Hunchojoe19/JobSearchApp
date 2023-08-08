@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#landing {
+  background-image: url("./assets/background.png");
+  background-size: cover;
+  background-position: center;
+  background-color: #f9fafb;
+}
+.hamburger {
+  width: 24px;
+  height: 24px;
+  transition: all 0.5s;
+  cursor: pointer;
+  position: relative;
+}
+
+.hamburger-top,
+.hamburger-middle,
+.hamburger-bottom {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 2px;
+  background-color: black;
+  transform: rotate(0);
+  transition: all 0.5s;
+}
+.hamburger-middle {
+  transform: translateY(7px);
+}
+.hamburger-bottom {
+  transform: translateY(14px);
+}
+
+.open {
+  transform: rotate(90deg);
+  transform: translateY(0px);
+}
+.open .hamburger-top {
+  transform: rotate(45deg) translateY(6px) translate(6px);
+}
+
+.open .hamburger-middle {
+  display: none;
+}
+.open .hamburger-bottom {
+  transform: rotate(-45deg) translateY(6px) translate(-6px);
+}
+#auth {
+  background-color: #edeff2;
+  /* background-color: red; */
+  /* width: 100vw; */
+}
+#hero {
+  background-color: white;
+}
