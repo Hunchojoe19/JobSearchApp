@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { Avatar, Badge, Menu, MenuItem } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { Link, useNavigate } from "react-router-dom";
-import PermIdentityIcon from "@mui/icons-material/PermIdentity";
+import PersonIcon from "@mui/icons-material/Person";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 
@@ -121,7 +121,7 @@ const Navbar = () => {
               >
                 <MenuItem onClick={() => navigate("/profile")}>
                   <div className="flex justify-center items-center">
-                    <PermIdentityIcon
+                    <PersonIcon
                       fontSize="medium"
                       sx={{ marginRight: "0.5rem" }}
                     />
@@ -223,7 +223,7 @@ const Navbar = () => {
                 >
                   <MenuItem onClick={() => navigate("/profile")}>
                     <div className="flex justify-center items-center">
-                      <PermIdentityIcon
+                      <PersonIcon
                         fontSize="medium"
                         sx={{ marginRight: "0.5rem" }}
                       />
