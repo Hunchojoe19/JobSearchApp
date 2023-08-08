@@ -7,7 +7,6 @@ import { Link, useNavigate } from "react-router-dom";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
-import userSlice from "../redux/features/userSlice";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
