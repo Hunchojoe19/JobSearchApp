@@ -16,7 +16,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const GETJOBSAPPLIED = ({ page, size }) =>
   `http://localhost:8080/api/application?page=${page}&size=${size}`;
-const HomePage = () => {
+const MyJob = () => {
   const [details, setDetails] = useState(null);
   const [page, setPage] = React.useState(1);
   const [size, setSize] = React.useState(0);
@@ -48,7 +48,7 @@ const HomePage = () => {
     <div className="container mx-auto p-6">
       <div className="mt-6 md:mt-12 h-[100vh]">
         <p className="font-bold text-lg font-['Inter'] flex justify-start items-center md:text-2xl border border-t-2 border-b-0 border-x-0 py-6">
-          Jobs Added
+          Jobs Applied For
         </p>
         <div className="w-full mt-2 border border-solid" />
         <div className="mt-12">
@@ -125,7 +125,7 @@ const HomePage = () => {
                 />
 
                 <p className="font-bold text-xl mt-24 text-gray-400 font-['Inter'] flex justify-start items-center md:text-2xl">
-                  You haven't Posted any job yet
+                  You haven't applied for any jobs yet
                 </p>
               </div>
             )}
@@ -136,4 +136,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default MyJob;
