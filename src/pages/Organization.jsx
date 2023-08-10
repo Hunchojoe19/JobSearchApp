@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { saveUser } from "../redux/features/userSlice";
 
-const LOGIN_URL = "http://localhost:8080/api/v6/authorize";
+const LOGIN_URL =
+  "https://internship-central-6f407278bcda.herokuapp.com/api/v6/authorize";
 const Organization = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();

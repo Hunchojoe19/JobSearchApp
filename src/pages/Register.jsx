@@ -4,7 +4,8 @@ import { useDispatch } from "react-redux";
 import { saveUser } from "../redux/features/userSlice";
 import { useNavigate } from "react-router-dom";
 
-const REGISTER_URL = "http://localhost:8080/api/v6/signUp";
+const REGISTER_URL =
+  "https://internship-central-6f407278bcda.herokuapp.com/api/v6/signUp";
 
 const Register = () => {
   const navigate = useNavigate();

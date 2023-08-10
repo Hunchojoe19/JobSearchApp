@@ -15,7 +15,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const GETJOBSAPPLIED = ({ page, size }) =>
-  `http://localhost:8080/api/application?page=${page}&size=${size}`;
+  `https://internship-central-6f407278bcda.herokuapp.com/api/application?page=${page}&size=${size}`;
 const MyJob = () => {
   const [details, setDetails] = useState(null);
   const [page, setPage] = React.useState(1);

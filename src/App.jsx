@@ -23,6 +23,7 @@ import JobSuccess from "./pages/JobSuccess";
 import HomePage from "./pages/HomePage";
 import MyJob from "./pages/MyJob";
 import OrgSettings from "./pages/OrgSettings";
+import OrganizationDetails from "./pages/OrganizationDetails";
 
 function App() {
   const dispatch = useDispatch();
@@ -62,6 +63,7 @@ function App() {
           <Route path="/job_success" element={<JobSuccess />} />
           <Route path="/setting" element={<OrgSettings />} />
           <Route path="/homepage" element={<HomePage />} />
+          <Route path="/org_detail/:id" element={<OrganizationDetails />} />
         </Route>
       </Routes>
       <Footer />

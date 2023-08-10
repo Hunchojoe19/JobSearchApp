@@ -5,7 +5,8 @@ import { saveUser } from "../redux/features/userSlice";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Alert, Snackbar } from "@mui/material";
 
-const LOGIN_URL = "http://localhost:8080/api/v6/authorize";
+const LOGIN_URL =
+  "https://internship-central-6f407278bcda.herokuapp.com/api/v6/authorize";
 
 const Auth = () => {
   const navigate = useNavigate();

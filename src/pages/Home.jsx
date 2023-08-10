@@ -9,6 +9,7 @@ import { excerpt } from "../utilities";
 import jobnotfound from "../assets/jobnotfound.png";
 import { useDispatch, useSelector } from "react-redux";
 import { saveUser } from "../redux/features/userSlice";
+import moment from "moment/moment";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: "white",
@@ -21,9 +22,10 @@ const Item = styled(Paper)(({ theme }) => ({
   boxShadow: "0 0 5px rgba(0,0,0,0.5)",
 }));
 
-const GET_USER = "http://localhost:8080/api/v6/userDetails";
+const GET_USER =
+  "https://internship-central-6f407278bcda.herokuapp.com/api/v6/userDetails";
 const GET_JOBS = ({ page, size }) =>
-  `http://localhost:8080/api/job?page=${page}&size=${size}`;
+  `https://internship-central-6f407278bcda.herokuapp.com/api/job?page=${page}&size=${size}`;
 
 const Home = () => {
   const [success, setSuccess] = useState(true);
@@ -45,84 +47,85 @@ const Home = () => {
     setSearchValues({ ...searchValues, [e.target.name]: e.target.value });
   };
 
-  const details = [
-    {
-      id: 1,
-      name: "Backend Developer",
-      company: "Google",
-      location: "Bangalore",
-      salary: "₹ 10,00,000 - 20,00,000 PA.",
-      experience: "2 - 5 years",
-      skills: "Java, Python, C++",
-      description: "Lorem ipsum dolor ",
-      time: "1 day ago",
-      period: "Part Time",
-      type: "Remote",
-      about:
-        " We are an entertainment startup company focused on creating, developing, and producing original content for the music industry. We are looking for a creative, driven, and passionate individual to join our team as a Content Creator. The ideal candidate will be responsible for creating",
-    },
-    {
-      id: 2,
-      name: "Frontend Developer",
-      company: "Amazon",
-      location: "Bangalore",
-      salary: "₹ 10,00,000 - 20,00,000 PA.",
-      experience: "3 - 5 years",
-      skills: "Java, Python, C++",
-      description: "Lorem ipsum dolor ",
-      time: "1 day ago",
-      period: "Contract",
-      type: "Remote",
-      about:
-        "As a content contributor, you will have the opportunity to showcase and develop your writing skills, gain industry exposure, and be part of a growing vibrant music and entertainment movement.",
-    },
-    {
-      id: 3,
-      name: "Full Stack Developer",
-      company: "Microsoft",
-      location: "Lagos",
-      salary: "₹ 10,00,000 - 20,00,000 PA.",
-      experience: "2 years",
-      skills: "Java, Python, C++",
-      description: "Lorem ipsum dolor ",
-      time: "2 day ago",
-      period: "Full Time",
-      type: "Onsite",
-      about:
-        " We are an entertainment startup company focused on creating, developing, and producing original content for the music industry. We are looking for a creative, driven, and passionate individual to join our team as a Content Creator. The ideal candidate will be responsible for creating",
-    },
-    {
-      id: 4,
-      name: "Backend Developer",
-      company: "Google",
-      location: "Bangalore",
-      salary: "₹ 10,00,000 - 20,00,000 PA.",
-      experience: "2 - 5 years",
-      skills: "Java, Python, C++",
-      description: "Lorem ipsum dolor ",
-      time: "3 day ago",
-      period: "Contract",
-      type: "Hybrid",
-      about:
-        " As a content contributor, you will have the opportunity to showcase and develop your writing skills, gain industry exposure, and be part of a growing vibrant music and entertainment movement.",
-    },
-    {
-      id: 5,
-      name: "Backend Developer",
-      company: "Google",
-      location: "Canada",
-      salary: "₹ 10,00,000 - 20,00,000 PA.",
-      experience: "2 - 4 years",
-      skills: "Java, Python, C++",
-      description:
-        "Lorem ipsum dolor ghdghgdjhdh hasbibsduididsbhds hdsbidsbiudbdsubdsds isdbviudbaiudsbdiubdui nhbuiubiybibiubibubibubiub jkkiboinhobnoinbobnoiubibhiubiubiubiu  ",
-      time: "4 day ago",
-      period: "Part Time",
-      type: "Onsite",
-      about:
-        " We are an entertainment startup company focused on creating, developing, and producing original content for the music industry. We are looking for a creative, driven, and passionate individual to join our team as a Content Creator. The ideal candidate will be responsible for creating",
-    },
-  ];
+  // const details = [
+  //   {
+  //     id: 1,
+  //     name: "Backend Developer",
+  //     company: "Google",
+  //     location: "Bangalore",
+  //     salary: "₹ 10,00,000 - 20,00,000 PA.",
+  //     experience: "2 - 5 years",
+  //     skills: "Java, Python, C++",
+  //     description: "Lorem ipsum dolor ",
+  //     time: "1 day ago",
+  //     period: "Part Time",
+  //     type: "Remote",
+  //     about:
+  //       " We are an entertainment startup company focused on creating, developing, and producing original content for the music industry. We are looking for a creative, driven, and passionate individual to join our team as a Content Creator. The ideal candidate will be responsible for creating",
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Frontend Developer",
+  //     company: "Amazon",
+  //     location: "Bangalore",
+  //     salary: "₹ 10,00,000 - 20,00,000 PA.",
+  //     experience: "3 - 5 years",
+  //     skills: "Java, Python, C++",
+  //     description: "Lorem ipsum dolor ",
+  //     time: "1 day ago",
+  //     period: "Contract",
+  //     type: "Remote",
+  //     about:
+  //       "As a content contributor, you will have the opportunity to showcase and develop your writing skills, gain industry exposure, and be part of a growing vibrant music and entertainment movement.",
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Full Stack Developer",
+  //     company: "Microsoft",
+  //     location: "Lagos",
+  //     salary: "₹ 10,00,000 - 20,00,000 PA.",
+  //     experience: "2 years",
+  //     skills: "Java, Python, C++",
+  //     description: "Lorem ipsum dolor ",
+  //     time: "2 day ago",
+  //     period: "Full Time",
+  //     type: "Onsite",
+  //     about:
+  //       " We are an entertainment startup company focused on creating, developing, and producing original content for the music industry. We are looking for a creative, driven, and passionate individual to join our team as a Content Creator. The ideal candidate will be responsible for creating",
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "Backend Developer",
+  //     company: "Google",
+  //     location: "Bangalore",
+  //     salary: "₹ 10,00,000 - 20,00,000 PA.",
+  //     experience: "2 - 5 years",
+  //     skills: "Java, Python, C++",
+  //     description: "Lorem ipsum dolor ",
+  //     time: "3 day ago",
+  //     period: "Contract",
+  //     type: "Hybrid",
+  //     about:
+  //       " As a content contributor, you will have the opportunity to showcase and develop your writing skills, gain industry exposure, and be part of a growing vibrant music and entertainment movement.",
+  //   },
+  //   {
+  //     id: 5,
+  //     name: "Backend Developer",
+  //     company: "Google",
+  //     location: "Canada",
+  //     salary: "₹ 10,00,000 - 20,00,000 PA.",
+  //     experience: "2 - 4 years",
+  //     skills: "Java, Python, C++",
+  //     description:
+  //       "Lorem ipsum dolor ghdghgdjhdh hasbibsduididsbhds hdsbidsbiudbdsubdsds isdbviudbaiudsbdiubdui nhbuiubiybibiubibubibubiub jkkiboinhobnoinbobnoiubibhiubiubiubiu  ",
+  //     time: "4 day ago",
+  //     period: "Part Time",
+  //     type: "Onsite",
+  //     about:
+  //       " We are an entertainment startup company focused on creating, developing, and producing original content for the music industry. We are looking for a creative, driven, and passionate individual to join our team as a Content Creator. The ideal candidate will be responsible for creating",
+  //   },
+  // ];
+  const [details, setDetails] = useState([]);
   const [jobs, setJobs] = useState(details);
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(10);
@@ -148,8 +151,9 @@ const Home = () => {
       })
     );
   };
+
   const getJobList = () => {
-    fetch(GET_JOBS(page, size), {
+    fetch(GET_JOBS({ page, size }), {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -157,12 +161,15 @@ const Home = () => {
       },
     }).then((res) =>
       res.json().then((data) => {
-        setPage(data?.totalPages);
-        setSize(data?.totalItems);
+        if (res.status === 200) {
+          setDetails(data?.data);
+          console.log(data?.data);
+          setSize(data?.data?.totalItems);
+          setPage(data?.data?.totalPages);
+        }
       })
     );
   };
-
   useEffect(() => {
     getUserDetails();
   }, []);
@@ -250,31 +257,25 @@ const Home = () => {
           spacing={{ xs: 2, md: 3 }}
           columns={{ xs: 4, sm: 8, md: 12 }}
         >
-          {jobs.length ? (
-            Array.from(jobs).map((detail, id) => (
+          {details ? (
+            details.map((detail, id) => (
               <Grid item xs={12} sm={12} md={4} key={id}>
                 <Item>
                   <div className="flex flex-col justify-center items-start">
                     <h1 className="text-2xl font-bold font-['mono'] md:text-4xl lg:text-3xl">
-                      {detail.name}
+                      {detail.title.charAt(0).toUpperCase() +
+                        detail.title.slice(1)}
                     </h1>
-                    <p className="font-['Inter'] font-bold mt-2 md:text-xl lg:text-sm">
-                      {detail.company} - {detail.location}
-                    </p>
-                    <p className="mt-2 md:text-2xl lg:text-base">
-                      Experience: {detail.experience}
-                    </p>
+
                     <div className="flex justify-between items-center mt-2">
                       <p className="bg-green-300 p-2 rounded-full text-white md:text-xl lg:text-sm">
-                        {detail.period}
+                        {detail.location}
                       </p>
                       <p className="bg-blue-300 p-2 rounded-full ml-2 text-white md:text-xl lg:text-sm">
                         {detail.type}
                       </p>
                     </div>
-                    <span className="font-bold mt-2 md:text-xl lg:text-sm">
-                      skills: {detail.skills}
-                    </span>
+
                     <p className="font-bold mt-2 md:text-xl lg:text-base">
                       Description:
                     </p>
@@ -286,7 +287,7 @@ const Home = () => {
                     <button
                       className="bg-gray-500 w-24 p-2 rounded-full text-white md:w-28"
                       onClick={() =>
-                        navigate(`/details/${detail.id}`, {
+                        navigate(`/details/${detail.reference}`, {
                           state: { detail },
                         })
                       }
@@ -294,7 +295,10 @@ const Home = () => {
                       Read More
                     </button>
 
-                    <i className="mt-2 text-gray-400">Posted: {detail.time}</i>
+                    <i className="mt-2 text-gray-400">
+                      APllication Deadline:{" "}
+                      {moment(detail.endDate).format("LL")}
+                    </i>
                   </div>
                 </Item>
               </Grid>

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import logo from "../assets/Logo.png";
+import logo from "../assets/MyLogo.png";
 import { useSelector } from "react-redux";
 import { Avatar, Badge, Menu, MenuItem } from "@mui/material";
 import { styled } from "@mui/material/styles";
@@ -65,7 +65,7 @@ const Navbar = () => {
     <nav className="relative container mx-auto p-6 ">
       <div className="flex items-center justify-between ">
         <div className="pt-2 w-64 h-4 flex justify-center items-center">
-          <img src={logo} alt="logo" />
+          <img src={logo} alt="logo" className="h-16" />
         </div>
         {!token && (
           <div className="hidden md:flex md:space-x-10 md:justify-center md:items-center">
@@ -103,7 +103,7 @@ const Navbar = () => {
               overlap="circular"
               anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
               variant="dot"
-              marginLeft="2rem"
+              sx={{ marginLeft: "2rem" }}
             >
               <Avatar
                 src="/broken-image.jpg"
@@ -205,7 +205,7 @@ const Navbar = () => {
                 overlap="circular"
                 anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
                 variant="dot"
-                marginLeft="2rem"
+                sx={{ marginLeft: "2rem" }}
               >
                 <Avatar
                   src="/broken-image.jpg"

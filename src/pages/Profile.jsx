@@ -15,6 +15,9 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import pdf from "../assets/pdf.png";
 import { useSelector } from "react-redux";
 
+const ADD_EDUCATION =
+  "https://internship-central-6f407278bcda.herokuapp.com/api/education/add";
+
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
@@ -56,13 +59,18 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 const Profile = () => {
   const [file, setFile] = useState(null);
   const [expanded, setExpanded] = React.useState("panel1");
-  const [value, setValue] = React.useState({
-    startvalue: null,
-    endvalue: null,
-  });
+  const [endValue, setEndValue] = useState(null);
+  const [startValue, setStartValue] = useState(null);
+
   const [formValues, setFormValues] = useState({
-    tags: [],
+    school: "",
+    degree: "",
+    fieldOfStudy: "",
+    startDate: startValue,
+    endDate: endValue,
   });
+
+  console.log("dates ", endValue, startValue);
 
   const { userDetails: select } = useSelector((state) => state);
   console.log("user details ", select.details);
@@ -70,6 +78,7 @@ const Profile = () => {
   const phone = select?.details?.phoneNo;
   const firstName = select?.details?.firstName;
   const lastName = select?.details?.lastName;
+  const token = select?.details?.token;
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
@@ -78,6 +87,25 @@ const Profile = () => {
   const handleFile = (e) => {
     const file = e.target.files[0];
     setFile(file);
+  };
+
+  const userProfile = {
+    school: formValues.school,
+    degree: formValues.degree,
+    fieldOfStudy: formValues.fieldOfStudy,
+    startDate: startValue,
+    endDate: endValue,
+  };
+
+  const postEducation = () => {
+    fetch(ADD_EDUCATION, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(formValues),
+    });
   };
 
   function getMonthName(monthNumber) {
@@ -209,13 +237,29 @@ const Profile = () => {
                       </div>
                       <div className="mt-2">
                         <p className="text-sm font-bold">Name of University</p>
-                        <input className="mt-2 w-[330px] h-[40px] border border-gray-300 rounded-lg px-4 focus:outline-none" />
+                        <input
+                          className="mt-2 w-[330px] h-[40px] border border-gray-300 rounded-lg px-4 focus:outline-none"
+                          value={formValues.school}
+                          onChange={(e) =>
+                            setFormValues({
+                              ...formValues,
+                              school: e.target.value,
+                            })
+                          }
+                        />
                       </div>
                       <div className="mt-4">
                         <p className="text-sm font-bold">Degree</p>
                         <input
                           className="mt-2 w-[330px] h-[40px] border border-gray-300 rounded-lg px-4 focus:outline-none placeholder-gray-300 placeholder-opacity-75"
                           placeholder="BA, BS, BAA etc."
+                          value={formValues.degree}
+                          onChange={(e) =>
+                            setFormValues({
+                              ...formValues,
+                              degree: e.target.value,
+                            })
+                          }
                         />
                       </div>
                       <div className="mt-4">
@@ -223,14 +267,27 @@ const Profile = () => {
                         <input
                           className="mt-2 w-[330px] h-[40px] border border-gray-300 rounded-lg px-4 focus:outline-none placeholder-gray-300 placeholder-opacity-75"
                           placeholder="Science, Engineering, etc."
+                          value={formValues.fieldOfStudy}
+                          onChange={(e) =>
+                            setFormValues({
+                              ...formValues,
+                              fieldOfStudy: e.target.value,
+                            })
+                          }
                         />
                       </div>
                       <div className="mt-4">
                         <p className="text-sm font-bold">Start date</p>
                         <DemoContainer components={["DatePicker"]}>
                           <DatePicker
-                            value={value}
-                            onChange={(newValue) => setValue(newValue)}
+                            dateFormat="yyyy-MM-dd"
+                            value={startValue}
+                            onChange={(dateValue) => {
+                              const d = new Date(dateValue).toLocaleDateString(
+                                "fr-FR"
+                              );
+                              setStartValue(d);
+                            }}
                           />
                         </DemoContainer>
                       </div>
@@ -238,13 +295,20 @@ const Profile = () => {
                         <p className="text-sm font-bold">End date</p>
                         <DemoContainer components={["DatePicker"]}>
                           <DatePicker
-                            value={value}
-                            onChange={(newValue) => setValue(newValue)}
+                            value={endValue}
+                            onChange={(newValue) => {
+                              setEndValue(newValue);
+                            }}
                           />
                         </DemoContainer>
                       </div>
                       <div className="mt-4 flex justify-center items-center">
-                        <button className="bg-blue-500 text-white text-md font-['Roboto'] text-center px-12 py-2 rounded-lg">
+                        <button
+                          className="bg-blue-500 text-white text-md font-['Roboto'] text-center px-12 py-2 rounded-lg"
+                          onClick={() => {
+                            console.log("submit ", formValues);
+                          }}
+                        >
                           Save
                         </button>
                       </div>
@@ -287,7 +351,16 @@ const Profile = () => {
                         <p className="text-sm font-bold md:text-xl lg:text-lg">
                           Name of University
                         </p>
-                        <input className="mt-2 w-[330px] h-[40px] border border-gray-300 rounded-lg px-4 focus:outline-none md:w-[560px] md:h-[60px] md:text-xl lg:text-lg lg:h-[40px]" />
+                        <input
+                          className="mt-2 w-[330px] h-[40px] border border-gray-300 rounded-lg px-4 focus:outline-none md:w-[560px] md:h-[60px] md:text-xl lg:text-lg lg:h-[40px]"
+                          value={formValues.school}
+                          onChange={(e) =>
+                            setFormValues({
+                              ...formValues,
+                              school: e.target.value,
+                            })
+                          }
+                        />
                       </div>
                       <div className="mt-4">
                         <p className="text-sm font-bold md:text-xl lg:text-lg">
@@ -296,6 +369,13 @@ const Profile = () => {
                         <input
                           className="mt-2 w-[330px] h-[40px] border border-gray-300 rounded-lg px-4 focus:outline-none placeholder-gray-300 placeholder-opacity-75 md:w-[560px] md:h-[60px] md:text-xl lg:text-lg lg:h-[40px]"
                           placeholder="BA, BS, BAA etc."
+                          value={formValues.degree}
+                          onChange={(e) =>
+                            setFormValues({
+                              ...formValues,
+                              degree: e.target.value,
+                            })
+                          }
                         />
                       </div>
                       <div className="mt-4">
@@ -305,6 +385,13 @@ const Profile = () => {
                         <input
                           className="mt-2 w-[330px] h-[40px] border border-gray-300 rounded-lg px-4 focus:outline-none placeholder-gray-300 placeholder-opacity-75 md:w-[560px] md:h-[60px] md:text-xl lg:text-lg lg:h-[40px]"
                           placeholder="Science, Engineering, etc."
+                          value={formValues.fieldOfStudy}
+                          onChange={(e) =>
+                            setFormValues({
+                              ...formValues,
+                              fieldOfStudy: e.target.value,
+                            })
+                          }
                         />
                       </div>
                       <div className="mt-4">
@@ -313,8 +400,8 @@ const Profile = () => {
                         </p>
                         <DemoContainer components={["DatePicker"]}>
                           <DatePicker
-                            value={value.startvalue}
-                            onChange={(newValue) => setValue(newValue)}
+                            value={startValue}
+                            onChange={(newValue) => setStartValue(newValue)}
                           />
                         </DemoContainer>
                       </div>
@@ -324,8 +411,8 @@ const Profile = () => {
                         </p>
                         <DemoContainer components={["DatePicker"]}>
                           <DatePicker
-                            value={value.endvalue}
-                            onChange={(newValue) => setValue(newValue)}
+                            value={endValue}
+                            onChange={(newValue) => setEndValue(newValue)}
                           />
                         </DemoContainer>
                       </div>

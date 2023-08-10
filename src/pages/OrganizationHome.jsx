@@ -11,8 +11,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { saveUser } from "../redux/features/userSlice";
 import { Link, useNavigate } from "react-router-dom";
 
-const GET_USER = "http://localhost:8080/api/v6/userDetails";
-const POST_JOB = "http://localhost:8080/api/job/create";
+const GET_USER =
+  "https://internship-central-6f407278bcda.herokuapp.com/api/v6/userDetails";
+const POST_JOB =
+  "https://internship-central-6f407278bcda.herokuapp.com/api/job/create";
 
 const OrganizationHome = () => {
   const [value, setValue] = React.useState(null);
@@ -40,8 +42,9 @@ const OrganizationHome = () => {
     description: createJobValues.description,
     location: createJobValues.location.toUpperCase(),
     type: createJobValues.type.toUpperCase(),
+    country: createJobValues.country,
     endDate: value?.format("YYYY-MM-DD"),
-    // status: "ACTIVE",
+    status: "ACTIVE",
   };
 
   const getUserDetails = () => {
@@ -71,7 +74,7 @@ const OrganizationHome = () => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(Object(postData)),
+      body: JSON.stringify(postData),
     }).then((res) => {
       if (res.status === 201) {
         console.log("job created successfully");
@@ -109,6 +112,20 @@ const OrganizationHome = () => {
                   setCreateJobValues({
                     ...createJobValues,
                     title: e.target.value,
+                  })
+                }
+                className="mt-4 w-[300px] h-[50px] placeholder-gray-300 placeholder-opacity-75 rounded-lg px-6 text-md border border-solid border-gray-200 focus:outline-none md:w-[700px] md:h-[70px]"
+              />
+            </div>
+            <div className="mt-6">
+              <p className="text-lg md:text-xl">Country</p>
+              <input
+                type="text"
+                value={createJobValues.country}
+                onChange={(e) =>
+                  setCreateJobValues({
+                    ...createJobValues,
+                    country: e.target.value,
                   })
                 }
                 className="mt-4 w-[300px] h-[50px] placeholder-gray-300 placeholder-opacity-75 rounded-lg px-6 text-md border border-solid border-gray-200 focus:outline-none md:w-[700px] md:h-[70px]"
@@ -204,7 +221,10 @@ const OrganizationHome = () => {
                 position: "absolute",
               }}
             />
-            <button className="rounded-full text-lg bg-blue-500 w-44 h-12 text-white flex justify-center items-center ">
+            <button
+              className="rounded-full text-lg bg-blue-500 w-44 h-12 text-white flex justify-center items-center "
+              onClick={postJob}
+            >
               Post a Job
             </button>
           </div>

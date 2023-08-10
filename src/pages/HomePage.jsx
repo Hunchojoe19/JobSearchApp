@@ -2,11 +2,15 @@ import styled from "@emotion/styled";
 import { Pagination, Paper, Stack, Grid } from "@mui/material";
 import jobnotfound from "../assets/jobnotfound.png";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import { excerpt } from "../utilities";
+import moment from "moment/moment";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: "white",
-  ...theme.typography.body2,
-  padding: theme.spacing(2),
+  // ...theme.typography,
+  padding: "2rem",
   textAlign: "center",
   minHeight: "200px",
   borderRadius: "10px",
@@ -15,28 +19,45 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const GETJOBSAPPLIED = ({ page, size }) =>
-  `http://localhost:8080/api/application?page=${page}&size=${size}`;
+  `https://internship-central-6f407278bcda.herokuapp.com/api/job/recruiter?page=${page}&size=${size}`;
 const HomePage = () => {
-  const [details, setDetails] = useState(null);
+  const [details, setDetails] = useState([]);
+  const { search } = useLocation();
+  console.log(search);
   const [page, setPage] = React.useState(1);
-  const [size, setSize] = React.useState(0);
+  const [size, setSize] = React.useState(1);
   const handleChange = (event, value) => {
     setPage(value);
   };
 
+  const navigate = useNavigate();
+
+  const { userDetails } = useSelector((state) => state);
+
+  console.log("user details ", userDetails);
+  const token = userDetails?.details?.token;
+
   const getJob = () => {
-    fetch(GETJOBSAPPLIED, {
+    fetch(GETJOBSAPPLIED({ page, size }), {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
     }).then((res) =>
       res.json().then((data) => {
-        setDetails(data);
-        setSize(data?.data?.totalItems);
-        setPage(data?.data?.totalPages);
-        console.log(data);
-        setDetails(data);
+        // setDetails(data);
+        // console.log("data ", details);
+        // setSize(data?.data?.totalItems);
+        // setPage(data?.data?.totalPages);
+        // console.log("data here", data);
+        // setDetails(data);
+        if (res.status === 200) {
+          setDetails(data?.data);
+          console.log(data?.data);
+          setSize(data?.data?.totalItems);
+          setPage(data?.data?.totalPages);
+        }
       })
     );
   };
@@ -46,7 +67,7 @@ const HomePage = () => {
   }, []);
   return (
     <div className="container mx-auto p-6">
-      <div className="mt-6 md:mt-12 h-[100vh]">
+      <div className="mt-6 md:mt-12 h-[100%] lg:h-[100%]">
         <p className="font-bold text-lg font-['Inter'] flex justify-start items-center md:text-2xl border border-t-2 border-b-0 border-x-0 py-6">
           Jobs Added
         </p>
@@ -58,29 +79,30 @@ const HomePage = () => {
             columns={{ xs: 4, sm: 8, md: 12 }}
           >
             {details ? (
-              Array.from(jobs).map((detail, id) => (
+              details?.map((detail, id) => (
                 <Grid item xs={12} sm={12} md={4} key={id}>
                   <Item>
                     <div className="flex flex-col justify-center items-start">
                       <h1 className="text-2xl font-bold font-['mono'] md:text-4xl lg:text-3xl">
-                        {detail.name}
+                        {detail.title.charAt(0).toUpperCase() +
+                          detail.title.slice(1)}
                       </h1>
-                      <p className="font-['Inter'] font-bold mt-2 md:text-xl lg:text-sm">
+                      {/* <p className="font-['Inter'] font-bold mt-2 md:text-xl lg:text-sm">
                         {detail.company} - {detail.location}
-                      </p>
-                      <p className="mt-2 md:text-2xl lg:text-base">
+                      </p> */}
+                      {/* <p className="mt-2 md:text-2xl lg:text-base">
                         Experience: {detail.experience}
-                      </p>
+                      </p> */}
                       <div className="flex justify-between items-center mt-2">
                         <p className="bg-green-300 p-2 rounded-full text-white md:text-xl lg:text-sm">
-                          {detail.period}
+                          {detail.location}
                         </p>
                         <p className="bg-blue-300 p-2 rounded-full ml-2 text-white md:text-xl lg:text-sm">
                           {detail.type}
                         </p>
                       </div>
                       <span className="font-bold mt-2 md:text-xl lg:text-sm">
-                        skills: {detail.skills}
+                        {/* skills: {detail.skills} */}
                       </span>
                       <p className="font-bold mt-2 md:text-xl lg:text-base">
                         Description:
@@ -93,7 +115,7 @@ const HomePage = () => {
                       <button
                         className="bg-gray-500 w-24 p-2 rounded-full text-white md:w-28"
                         onClick={() =>
-                          navigate(`/details/${detail.id}`, {
+                          navigate(`/org_detail/${detail.reference}`, {
                             state: { detail },
                           })
                         }
@@ -102,14 +124,15 @@ const HomePage = () => {
                       </button>
 
                       <i className="mt-2 text-gray-400">
-                        Posted: {detail.time}
+                        APllication Deadline:{" "}
+                        {moment(detail.endDate).format("LL")}
                       </i>
                     </div>
                   </Item>
                   <div className="mt-12">
                     <Stack spacing={2}>
                       <Pagination
-                        count={10}
+                        count={size}
                         page={page}
                         onChange={handleChange}
                       />
@@ -118,7 +141,7 @@ const HomePage = () => {
                 </Grid>
               ))
             ) : (
-              <div className="mt-12 block justify-center items-center">
+              <div className="mt-12 block justify-center items-center md:flex md:justify-center md:items-center lg:ml-[10rem]">
                 <img
                   src={jobnotfound}
                   className="h-42 md:h-96 md:flex md:justify-center"

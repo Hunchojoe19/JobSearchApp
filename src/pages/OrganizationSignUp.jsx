@@ -3,7 +3,8 @@ import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-const REGISTER_URL = "http://localhost:8080/api/v6/recruiter-signUp";
+const REGISTER_URL =
+  "https://internship-central-6f407278bcda.herokuapp.com/api/v6/recruiter-signUp";
 
 const OrganizationSignUp = () => {
   const navigate = useNavigate();
