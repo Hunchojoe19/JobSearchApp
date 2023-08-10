@@ -277,7 +277,7 @@ const Profile = () => {
                       </div>
                       <div className="mt-4">
                         <p className="text-sm font-bold">Degree</p>
-                        <input
+                        <select
                           className="mt-2 w-[330px] h-[40px] border border-gray-300 rounded-lg px-4 focus:outline-none placeholder-gray-300 placeholder-opacity-75"
                           placeholder="BA, BS, BAA etc."
                           value={formValues.degree}
@@ -287,7 +287,15 @@ const Profile = () => {
                               degree: e.target.value,
                             })
                           }
-                        />
+                        >
+                          <option value=""></option>
+                          <option value="BA">BA</option>
+                          <option value="BASC">BASC</option>
+                          <option value="BARCH">BARCH</option>
+                          <option value="BBA">BBA</option>
+                          <option value="BAF">BAF</option>
+                          <option value="ASSOCIATE">ASSOCIATE</option>
+                        </select>
                       </div>
                       <div className="mt-4">
                         <p className="text-sm font-bold">Field of study</p>
