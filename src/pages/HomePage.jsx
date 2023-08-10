@@ -17,7 +17,6 @@ const Item = styled(Paper)(({ theme }) => ({
   marginBottom: "20px",
   boxShadow: "0 0 5px rgba(0,0,0,0.5)",
 }));
-
 const GETJOBSAPPLIED = ({ page, size }) =>
   `https://internship-central-6f407278bcda.herokuapp.com/api/job/recruiter?page=${page}&size=${size}`;
 const HomePage = () => {
@@ -46,12 +45,6 @@ const HomePage = () => {
       },
     }).then((res) =>
       res.json().then((data) => {
-        // setDetails(data);
-        // console.log("data ", details);
-        // setSize(data?.data?.totalItems);
-        // setPage(data?.data?.totalPages);
-        // console.log("data here", data);
-        // setDetails(data);
         if (res.status === 200) {
           setDetails(data?.data);
           console.log(data?.data);
