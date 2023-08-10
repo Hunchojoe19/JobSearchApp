@@ -82,6 +82,14 @@ const Profile = () => {
   const firstName = select?.details?.firstName;
   const lastName = select?.details?.lastName;
   const token = select?.details?.token;
+  const education = select?.details?.educationDtoList;
+  const last = education.length - 1;
+  console.log("education ", education[last]?.school);
+  console.log("education ", education[last]?.degree);
+  console.log("education ", education[last]?.fieldOfStudy);
+  console.log("education ", education[last]?.startDate);
+  console.log("education ", education[last]?.endDate);
+  console.log("experience ", education);
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
@@ -258,6 +266,7 @@ const Profile = () => {
                       </p>
                       <input className="mt-2 w-[330px] h-[40px] border border-gray-300 rounded-lg px-4 focus:outline-none" />
                     </div>
+
                     <div className="mt-16">
                       <div className="mb-2">
                         <p className="text-md font-bold">Education:</p>
@@ -266,6 +275,7 @@ const Profile = () => {
                         <p className="text-sm font-bold">Name of University</p>
                         <input
                           className="mt-2 w-[330px] h-[40px] border border-gray-300 rounded-lg px-4 focus:outline-none"
+                          defaultValue={education[last]?.school}
                           value={formValues.school}
                           onChange={(e) =>
                             setFormValues({
@@ -280,6 +290,7 @@ const Profile = () => {
                         <select
                           className="mt-2 w-[330px] h-[40px] border border-gray-300 rounded-lg px-4 focus:outline-none placeholder-gray-300 placeholder-opacity-75"
                           placeholder="BA, BS, BAA etc."
+                          defaultValue={education[last]?.degree}
                           value={formValues.degree}
                           onChange={(e) =>
                             setFormValues({
@@ -302,6 +313,7 @@ const Profile = () => {
                         <input
                           className="mt-2 w-[330px] h-[40px] border border-gray-300 rounded-lg px-4 focus:outline-none placeholder-gray-300 placeholder-opacity-75"
                           placeholder="Science, Engineering, etc."
+                          defaultValue={education[last]?.fieldOfStudy}
                           value={formValues.fieldOfStudy}
                           onChange={(e) =>
                             setFormValues({
@@ -316,6 +328,7 @@ const Profile = () => {
                         <DemoContainer components={["DatePicker"]}>
                           <DatePicker
                             dateFormat="yyyy-MM-dd"
+                            defaultValue={education[last]?.startDate}
                             value={startValue}
                             onChange={(dateValue) => {
                               setStartValue(dateValue);
@@ -327,6 +340,7 @@ const Profile = () => {
                         <p className="text-sm font-bold">End date</p>
                         <DemoContainer components={["DatePicker"]}>
                           <DatePicker
+                            defaultValue={education[last]?.endDate}
                             value={endValue}
                             onChange={(newValue) => {
                               setEndValue(newValue);
@@ -383,6 +397,7 @@ const Profile = () => {
                         </p>
                         <input
                           className="mt-2 w-[330px] h-[40px] border border-gray-300 rounded-lg px-4 focus:outline-none md:w-[560px] md:h-[60px] md:text-xl lg:text-lg lg:h-[40px]"
+                          defaultValue={education[last]?.school}
                           value={formValues.school}
                           onChange={(e) =>
                             setFormValues({
@@ -399,6 +414,7 @@ const Profile = () => {
                         <input
                           className="mt-2 w-[330px] h-[40px] border border-gray-300 rounded-lg px-4 focus:outline-none placeholder-gray-300 placeholder-opacity-75 md:w-[560px] md:h-[60px] md:text-xl lg:text-lg lg:h-[40px]"
                           placeholder="BA, BS, BAA etc."
+                          defaultValue={education[last]?.degree}
                           value={formValues.degree}
                           onChange={(e) =>
                             setFormValues({
@@ -415,6 +431,7 @@ const Profile = () => {
                         <input
                           className="mt-2 w-[330px] h-[40px] border border-gray-300 rounded-lg px-4 focus:outline-none placeholder-gray-300 placeholder-opacity-75 md:w-[560px] md:h-[60px] md:text-xl lg:text-lg lg:h-[40px]"
                           placeholder="Science, Engineering, etc."
+                          defaultValue={education[last]?.fieldOfStudy}
                           value={formValues.fieldOfStudy}
                           onChange={(e) =>
                             setFormValues({
@@ -430,6 +447,7 @@ const Profile = () => {
                         </p>
                         <DemoContainer components={["DatePicker"]}>
                           <DatePicker
+                            defaultValue={education[last]?.startDate}
                             value={startValue}
                             onChange={(newValue) => setStartValue(newValue)}
                           />
@@ -441,6 +459,7 @@ const Profile = () => {
                         </p>
                         <DemoContainer components={["DatePicker"]}>
                           <DatePicker
+                            defaultValue={education[last]?.endDate}
                             value={endValue}
                             onChange={(newValue) => setEndValue(newValue)}
                           />

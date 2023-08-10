@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import logo from "../assets/MyLogo.png";
+import logo from "../assets/internship.jpg";
 import { useSelector } from "react-redux";
 import { Avatar, Badge, Menu, MenuItem } from "@mui/material";
 import { styled } from "@mui/material/styles";
