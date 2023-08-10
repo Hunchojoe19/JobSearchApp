@@ -18,6 +18,9 @@ import { useSelector } from "react-redux";
 const ADD_EDUCATION =
   "https://internship-central-6f407278bcda.herokuapp.com/api/education/add";
 
+const POST_CV =
+  "https://internship-central-6f407278bcda.herokuapp.com/api/cv/upload";
+
 const Accordion = styled((props) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
@@ -87,40 +90,56 @@ const Profile = () => {
   const handleFile = (e) => {
     const file = e.target.files[0];
     setFile(file);
+    console.log("file ", file);
   };
 
   const userProfile = {
     school: formValues.school,
-    degree: formValues.degree,
-    fieldOfStudy: formValues.fieldOfStudy,
-    startDate: startValue,
-    endDate: endValue,
+    degree: formValues.degree.toUpperCase(),
+    fieldOfStudy: formValues.fieldOfStudy.toUpperCase(),
+    startDate: startValue?.toISOString().slice(0, 10),
+    endDate: endValue?.toISOString().slice(0, 10),
+  };
+
+  const uploadCv = () => {
+    const formData = new FormData();
+    formData.append("cv", file);
+    // formData.append("userProfile", JSON.stringify(userProfile));
+    console.log("form data ", formData);
+    fetch(POST_CV, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
   };
 
   const postEducation = () => {
+    console.log("data backend", userProfile);
     fetch(ADD_EDUCATION, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(formValues),
+      body: JSON.stringify(userProfile),
     });
   };
 
-  function getMonthName(monthNumber) {
-    const date = new Date();
-    date.setMonth(monthNumber - 1);
+  // function getMonthName(monthNumber) {
+  //   const date = new Date();
+  //   date.setMonth(monthNumber - 1);
 
-    return date.toLocaleString("en-US", { month: "short" });
-  }
-  const date = new Date();
-  const formatedDate =
-    date.getDate() +
-    "-" +
-    getMonthName(String(date.getMonth())) +
-    "-" +
-    date.getFullYear();
+  //   return date.toLocaleString("en-US", { month: "short" });
+  // }
+  // const date = new Date();
+  // const formatedDate =
+  //   date.getDate() +
+  //   "-" +
+  //   getMonthName(String(date.getMonth())) +
+  //   "-" +
+  //   date.getFullYear();
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -200,6 +219,14 @@ const Profile = () => {
                   />
                 )}
                 {file && <p className="md:text-xl lg:text-base">{file.name}</p>}
+              </div>
+              <div className="mt-8">
+                <button
+                  className="flex justify-center items-center w-[350px] h-[50px] text-lg text-white bg-blue-500 rounded-xl"
+                  onClick={uploadCv}
+                >
+                  Upload Resume
+                </button>
               </div>
               <div className="mt-4 text-2xl text-left">
                 <p className="font-bold text-left font-['Roboto'] ml-[-2.5rem] md:text-4xl md:mt-8 lg:text-2xl lg:ml-[-18rem]">
@@ -283,10 +310,7 @@ const Profile = () => {
                             dateFormat="yyyy-MM-dd"
                             value={startValue}
                             onChange={(dateValue) => {
-                              const d = new Date(dateValue).toLocaleDateString(
-                                "fr-FR"
-                              );
-                              setStartValue(d);
+                              setStartValue(dateValue);
                             }}
                           />
                         </DemoContainer>
@@ -305,9 +329,7 @@ const Profile = () => {
                       <div className="mt-4 flex justify-center items-center">
                         <button
                           className="bg-blue-500 text-white text-md font-['Roboto'] text-center px-12 py-2 rounded-lg"
-                          onClick={() => {
-                            console.log("submit ", formValues);
-                          }}
+                          onClick={postEducation}
                         >
                           Save
                         </button>
