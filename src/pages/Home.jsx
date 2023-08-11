@@ -183,14 +183,12 @@ const Home = () => {
   const education = user?.data?.educationDtoList;
 
   const handleSearch = () => {
-    setJobs(
-      details.filter((x) => {
+    const temp = details.filter(
+      (x) =>
         x.title.toLowerCase().includes(searchValues.search.toLowerCase()) &&
-          x.location
-            .toLowerCase()
-            .includes(searchValues.location.toLowerCase());
-      })
+        x.location.toLowerCase().includes(searchValues.location.toLowerCase())
     );
+    setJobs(temp);
   };
 
   return (
@@ -254,7 +252,7 @@ const Home = () => {
           columns={{ xs: 4, sm: 8, md: 12 }}
         >
           {details ? (
-            details.map((detail, id) => (
+            Array.from(jobs).map((detail, id) => (
               <Grid item xs={12} sm={12} md={4} key={id}>
                 <Item>
                   <div className="flex flex-col justify-center items-start">
