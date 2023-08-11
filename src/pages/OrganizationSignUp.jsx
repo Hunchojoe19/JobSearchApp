@@ -56,7 +56,7 @@ const OrganizationSignUp = () => {
             setErr(response.errorMessages);
           }
         })
-        .catch((err) => console.log(err));
+        .catch((err) => err);
     }
   };
   return (
@@ -75,7 +75,7 @@ const OrganizationSignUp = () => {
                 alignItems: "center",
               }}
               onSubmit={handleAuth}
-              onError={(errors) => console.log(errors)}
+              onError={(errors) => errors}
             >
               <TextValidator
                 sx={{ width: "350px" }}

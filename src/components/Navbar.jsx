@@ -42,7 +42,7 @@ const Navbar = () => {
   const [user, setUser] = React.useState(null);
 
   const { userDetails: select } = useSelector((state) => state);
-  console.log("select ", select);
+  "select ", select;
   const username = select.details.username;
 
   localStorage.setItem("user", JSON.stringify({ ...select.details }));
@@ -158,7 +158,7 @@ const Navbar = () => {
 
             <div className="ml-4">
               <p className="text-base  text-darkGrayishBlue">
-                user id: {(" ", username)}
+                user name: {(" ", username)}
               </p>
               <p className="text-base text-darkGrayishBlue">{email}</p>
             </div>

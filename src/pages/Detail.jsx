@@ -14,7 +14,7 @@ const Detail = () => {
 
   const navigate = useNavigate();
 
-  console.log(location.state);
+  location.state;
 
   const { userDetails } = useSelector((state) => state);
 

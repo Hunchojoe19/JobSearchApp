@@ -134,7 +134,7 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const { userDetails: select } = useSelector((state) => state);
-  console.log("user details ", select.details);
+  "user details ", select.details;
   const token = select.details.token;
 
   const getUserDetails = () => {
@@ -163,7 +163,7 @@ const Home = () => {
       res.json().then((data) => {
         if (res.status === 200) {
           setDetails(data?.data);
-          console.log(data?.data);
+          data?.data;
           setSize(data?.data?.totalItems);
           setPage(data?.data?.totalPages);
         }
@@ -178,24 +178,26 @@ const Home = () => {
     getJobList();
   }, [page, size]);
 
-  console.log("user", user.data);
+  "user", user.data;
   const experience = user?.data?.experienceDtoList;
   const education = user?.data?.educationDtoList;
 
   const handleSearch = () => {
-    // setDetails((prev) =>
-
-    // );
+    console.log("details ", details);
     setJobs(
-      details.filter(
-        (x) =>
+      details.filter((x) => {
+        x.title.toLowerCase().includes(searchValues.search.toLowerCase()) &&
           x.location
             .toLowerCase()
-            .includes(searchValues.location.toLowerCase()) &&
-          x.type.toLowerCase() === searchValues.search.toLowerCase()
-      )
+            .includes(searchValues.location.toLowerCase());
+        // console.log("x", x.title);
+        // console.log("x2", x.location);
+        // console.log("seach values", searchValues.search);
+        // console.log("search location", searchValues.location);
+      })
     );
   };
+  console.log("jobs", jobs);
 
   return (
     <div className="container mx-auto mt-8">
@@ -209,7 +211,7 @@ const Home = () => {
                 value={searchValues.search}
                 onChange={handleChange}
                 className="w-[350px] h-[50px] p-2 pr-6 border border border-gray-300 placeholder-slate-400 focus:outline-none rounded-md block w-full shadow-lg sm:text-sm md:w-[350px] lg:w-[400px] md:text-base"
-                placeholder="remote"
+                placeholder="Java, Teaching etc."
               />
               <SearchIcon
                 fontSize="large"
@@ -228,7 +230,7 @@ const Home = () => {
                 value={searchValues.location}
                 onChange={handleChange}
                 className="w-[357px] h-[50px] p-2 pr-6 border border border-gray-300 placeholder-slate-400 focus:outline-none rounded-md block w-full shadow-lg sm:text-sm md:w-[360px] lg:text-base lg:w-[400px]"
-                placeholder="city, state, zip code or country"
+                placeholder="Remote"
               />
               <LocationOn
                 fontSize="large"
@@ -257,7 +259,7 @@ const Home = () => {
           spacing={{ xs: 2, md: 3 }}
           columns={{ xs: 4, sm: 8, md: 12 }}
         >
-          {details ? (
+          {jobs.length ? (
             details.map((detail, id) => (
               <Grid item xs={12} sm={12} md={4} key={id}>
                 <Item>

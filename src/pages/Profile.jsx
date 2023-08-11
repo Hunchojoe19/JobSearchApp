@@ -73,10 +73,10 @@ const Profile = () => {
     endDate: endValue,
   });
 
-  console.log("dates ", endValue, startValue);
+  "dates ", endValue, startValue;
 
   const { userDetails: select } = useSelector((state) => state);
-  console.log("user details ", select.details);
+  "user details ", select.details;
   const email = select?.details?.email;
   const phone = select?.details?.phoneNo;
   const firstName = select?.details?.firstName;
@@ -84,12 +84,12 @@ const Profile = () => {
   const token = select?.details?.token;
   const education = select?.details?.educationDtoList;
   const last = education.length - 1;
-  console.log("education ", education[last]?.school);
-  console.log("education ", education[last]?.degree);
-  console.log("education ", education[last]?.fieldOfStudy);
-  console.log("education ", education[last]?.startDate);
-  console.log("education ", education[last]?.endDate);
-  console.log("experience ", education);
+  "education ", education[last]?.school;
+  "education ", education[last]?.degree;
+  "education ", education[last]?.fieldOfStudy;
+  "education ", education[last]?.startDate;
+  "education ", education[last]?.endDate;
+  "experience ", education;
 
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
@@ -98,7 +98,7 @@ const Profile = () => {
   const handleFile = (e) => {
     const file = e.target.files[0];
     setFile(file);
-    console.log("file ", file);
+    "file ", file;
   };
 
   const userProfile = {
@@ -113,7 +113,7 @@ const Profile = () => {
     const formData = new FormData();
     formData.append("cv", file);
     // formData.append("userProfile", JSON.stringify(userProfile));
-    console.log("form data ", formData);
+    "form data ", formData;
     fetch(POST_CV, {
       method: "POST",
       headers: {
@@ -124,7 +124,7 @@ const Profile = () => {
   };
 
   const postEducation = () => {
-    console.log("data backend", userProfile);
+    "data backend", userProfile;
     fetch(ADD_EDUCATION, {
       method: "POST",
       headers: {
@@ -135,19 +135,19 @@ const Profile = () => {
     });
   };
 
-  // function getMonthName(monthNumber) {
-  //   const date = new Date();
-  //   date.setMonth(monthNumber - 1);
+  function getMonthName(monthNumber) {
+    const date = new Date();
+    date.setMonth(monthNumber - 1);
 
-  //   return date.toLocaleString("en-US", { month: "short" });
-  // }
-  // const date = new Date();
-  // const formatedDate =
-  //   date.getDate() +
-  //   "-" +
-  //   getMonthName(String(date.getMonth())) +
-  //   "-" +
-  //   date.getFullYear();
+    return date.toLocaleString("en-US", { month: "short" });
+  }
+  const date = new Date();
+  const formatedDate =
+    date.getDate() +
+    "-" +
+    getMonthName(String(date.getMonth())) +
+    "-" +
+    date.getFullYear();
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>

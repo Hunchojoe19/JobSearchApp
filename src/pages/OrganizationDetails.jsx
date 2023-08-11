@@ -11,7 +11,7 @@ const OrganizationDetails = () => {
 
   const navigate = useNavigate();
 
-  console.log(location.state);
+  location.state;
 
   return (
     <div className="container mx-auto flex flex-col">

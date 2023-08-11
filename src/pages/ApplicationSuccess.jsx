@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 const ApplicationSuccess = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  console.log("location ", location.state);
+  "location ", location.state;
   return (
     <div className="container mx-auto p-6">
       <div className="mt-6 flex flex-col justify-center items-center md:mt-12">

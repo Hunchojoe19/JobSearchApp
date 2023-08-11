@@ -29,8 +29,8 @@ const Organization = () => {
         },
         body: JSON.stringify(Object(loginDetails)),
       }).then((response) => {
-        console.log("res ", response.status);
-        console.log("res ", response.headers["X-Access-Token"]);
+        "res ", response.status;
+        "res ", response.headers["X-Access-Token"];
         if (response.status === 204) {
           dispatch(
             saveUser({
@@ -69,7 +69,7 @@ const Organization = () => {
                 alignItems: "center",
               }}
               onSubmit={handleAuth}
-              onError={(errors) => console.log(errors)}
+              onError={(errors) => errors}
             >
               <TextValidator
                 sx={{

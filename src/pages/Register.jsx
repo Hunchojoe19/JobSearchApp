@@ -49,7 +49,7 @@ const Register = () => {
             setErr(response.errorMessages);
           }
         })
-        .catch((err) => console.log(err));
+        .catch((err) => err);
     }
   };
 
@@ -70,7 +70,7 @@ const Register = () => {
                 alignItems: "center",
               }}
               onSubmit={handleAuth}
-              onError={(errors) => console.log(errors)}
+              onError={(errors) => errors}
             >
               <TextValidator
                 sx={{ width: "350px" }}

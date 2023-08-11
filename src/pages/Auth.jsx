@@ -28,7 +28,7 @@ const Auth = () => {
   // const from = location.state?.from?.pathname || "/";
 
   const { userDetails: select } = useSelector((state) => state);
-  console.log("user details ", select.details);
+  "user details ", select.details;
 
   const [formValues, setFormValues] = useState({
     email: "",
@@ -51,13 +51,10 @@ const Auth = () => {
         },
         body: JSON.stringify(Object(loginDetails)),
       }).then((response) => {
-        console.log("res ", response.status);
-        console.log(
-          "response ",
-          (token = response.headers.get("X-Access-Token"))
-        );
-        console.log("response token", token);
-        // console.log("res ", response.headers["X-Access-Token"]);
+        "res ", response.status;
+        "response ", (token = response.headers.get("X-Access-Token"));
+        "response token", token;
+        // ("res ", response.headers["X-Access-Token"]);
         if (response.status === 204) {
           dispatch(saveUser({ ...loginDetails, token }));
           localStorage.setItem(
@@ -97,7 +94,7 @@ const Auth = () => {
                 alignItems: "center",
               }}
               onSubmit={handleAuth}
-              onError={(errors) => console.log(errors)}
+              onError={(errors) => errors}
             >
               <TextValidator
                 sx={{

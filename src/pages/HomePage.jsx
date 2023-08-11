@@ -22,7 +22,7 @@ const GETJOBSAPPLIED = ({ page, size }) =>
 const HomePage = () => {
   const [details, setDetails] = useState([]);
   const { search } = useLocation();
-  console.log(search);
+  search;
   const [page, setPage] = React.useState(1);
   const [size, setSize] = React.useState(1);
   const handleChange = (event, value) => {
@@ -33,7 +33,7 @@ const HomePage = () => {
 
   const { userDetails } = useSelector((state) => state);
 
-  console.log("user details ", userDetails);
+  "user details ", userDetails;
   const token = userDetails?.details?.token;
 
   const getJob = () => {
@@ -47,7 +47,7 @@ const HomePage = () => {
       res.json().then((data) => {
         if (res.status === 200) {
           setDetails(data?.data);
-          console.log(data?.data);
+          data?.data;
           setSize(data?.data?.totalItems);
           setPage(data?.data?.totalPages);
         }

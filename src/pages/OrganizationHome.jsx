@@ -33,8 +33,8 @@ const OrganizationHome = () => {
 
   const { userDetails: select } = useSelector((state) => state);
 
-  console.log("user details ", select?.details);
-  console.log("token ", select?.details?.token);
+  "user details ", select?.details;
+  "token ", select?.details?.token;
   const token = select?.details?.token;
 
   const postData = {
@@ -77,14 +77,14 @@ const OrganizationHome = () => {
       body: JSON.stringify(postData),
     }).then((res) => {
       if (res.status === 201) {
-        console.log("job created successfully");
+        ("job created successfully");
         navigate("/job_success");
       }
     });
-    // console.log("post data ", postData);
+    // ("post data ", postData);
   };
 
-  console.log("first name ", user?.data?.firstName);
+  "first name ", user?.data?.firstName;
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <section id="organization">

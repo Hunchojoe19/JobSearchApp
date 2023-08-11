@@ -39,7 +39,7 @@ const MyJob = () => {
       res.json().then((data) => {
         if (res.status === 200) {
           setDetails(data?.data);
-          console.log(data?.data);
+          data?.data;
           setSize(data?.data?.totalItems);
           setPage(data?.data?.totalPages);
         }
