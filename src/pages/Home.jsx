@@ -197,7 +197,7 @@ const Home = () => {
       })
     );
   };
-  console.log("jobs", jobs);
+  // console.log("jobs", jobs);
 
   return (
     <div className="container mx-auto mt-8">
@@ -259,7 +259,7 @@ const Home = () => {
           spacing={{ xs: 2, md: 3 }}
           columns={{ xs: 4, sm: 8, md: 12 }}
         >
-          {jobs.length ? (
+          {details ? (
             details.map((detail, id) => (
               <Grid item xs={12} sm={12} md={4} key={id}>
                 <Item>
