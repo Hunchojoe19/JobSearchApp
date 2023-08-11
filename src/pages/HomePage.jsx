@@ -58,6 +58,7 @@ const HomePage = () => {
   useEffect(() => {
     getJob();
   }, []);
+
   return (
     <div className="container mx-auto p-6">
       <div className="mt-6 md:mt-12 h-[100%] lg:h-[100%]">
@@ -80,9 +81,9 @@ const HomePage = () => {
                         {detail.title.charAt(0).toUpperCase() +
                           detail.title.slice(1)}
                       </h1>
-                      {/* <p className="font-['Inter'] font-bold mt-2 md:text-xl lg:text-sm">
-                        {detail.company} - {detail.location}
-                      </p> */}
+                      <p className="font-['Inter'] text-blue-500 text-xl font-bold mt-2 md:text-xl lg:text-sm">
+                        {detail.country}
+                      </p>
                       {/* <p className="mt-2 md:text-2xl lg:text-base">
                         Experience: {detail.experience}
                       </p> */}
@@ -117,7 +118,7 @@ const HomePage = () => {
                       </button>
 
                       <i className="mt-2 text-gray-400">
-                        APllication Deadline:{" "}
+                        Application Deadline:{" "}
                         {moment(detail.endDate).format("LL")}
                       </i>
                     </div>

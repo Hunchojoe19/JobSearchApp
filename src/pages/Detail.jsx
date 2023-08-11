@@ -49,6 +49,9 @@ const Detail = () => {
                 {location.state.detail.title.charAt(0).toUpperCase() +
                   location.state.detail.title.slice(1)}
               </h2>
+              <p className="font-['Inter'] text-blue-500 text-xl p-4 font-bold mt-2 md:text-xl lg:text-sm">
+                {location.state.detail.country}
+              </p>
             </div>
 
             <div className="flex justify-start ml-3 mt-4 items-center">

@@ -283,6 +283,11 @@ const Home = () => {
                     </h1>
 
                     <div className="flex justify-between items-center mt-2">
+                      <p className="font-['Inter'] text-blue-500 text-xl font-bold mt-2 md:text-xl lg:text-sm">
+                        {detail.country}
+                      </p>
+                    </div>
+                    <div className="flex justify-between items-center mt-2">
                       <p className="bg-green-300 p-2 rounded-full text-white md:text-xl lg:text-sm">
                         {detail.location}
                       </p>
@@ -311,7 +316,7 @@ const Home = () => {
                     </button>
 
                     <i className="mt-2 text-gray-400">
-                      APllication Deadline:{" "}
+                      Application Deadline:{" "}
                       {moment(detail.endDate).format("LL")}
                     </i>
                   </div>

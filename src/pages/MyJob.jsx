@@ -73,9 +73,9 @@ const MyJob = () => {
                         {detail?.jobTitle?.charAt(0).toUpperCase() +
                           detail?.jobTitle.slice(1)}
                       </h1>
-                      {/* <p className="font-['Inter'] font-bold mt-2 md:text-xl lg:text-sm">
-                        {detail.company} - {detail.location}
-                      </p> */}
+                      <p className="font-['Inter'] text-blue-500 text-xl font-bold mt-2 md:text-xl lg:text-sm">
+                        {detail.country}
+                      </p>
                       {/* <p className="mt-2 md:text-2xl lg:text-base">
                         Experience: {detail.experience}
                       </p> */}
