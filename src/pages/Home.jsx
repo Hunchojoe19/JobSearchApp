@@ -252,7 +252,7 @@ const Home = () => {
           columns={{ xs: 4, sm: 8, md: 12 }}
         >
           {details ? (
-            Array.from(jobs).map((detail, id) => (
+            Array.from(details).map((detail, id) => (
               <Grid item xs={12} sm={12} md={4} key={id}>
                 <Item>
                   <div className="flex flex-col justify-center items-start">
