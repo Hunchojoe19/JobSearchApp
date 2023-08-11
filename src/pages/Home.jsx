@@ -173,10 +173,13 @@ const Home = () => {
   useEffect(() => {
     getUserDetails();
   }, []);
+  useEffect(() => {
+    setJobs(details);
+  }, [details]);
 
   useEffect(() => {
     getJobList();
-  }, [page, size]);
+  }, []);
 
   "user", user.data;
   const experience = user?.data?.experienceDtoList;
@@ -190,6 +193,24 @@ const Home = () => {
     );
     setJobs(temp);
   };
+  useEffect(() => {
+    if (searchValues?.location === "" && searchValues?.search === "") {
+      setJobs(details);
+    } else if (searchValues.location || searchValues.search) {
+      const temp = details.filter(
+        (x) =>
+          x.location
+            .toLowerCase()
+            .includes(searchValues.location.toLowerCase()) &&
+          x.title.toLowerCase().includes(searchValues.search.toLowerCase())
+      );
+      if (temp.length) {
+        setJobs(temp);
+      } else {
+        setJobs(details);
+      }
+    }
+  }, [searchValues]);
 
   return (
     <div className="container mx-auto mt-8">
@@ -251,8 +272,8 @@ const Home = () => {
           spacing={{ xs: 2, md: 3 }}
           columns={{ xs: 4, sm: 8, md: 12 }}
         >
-          {details ? (
-            Array.from(details).map((detail, id) => (
+          {jobs.length ? (
+            Array.from(jobs).map((detail, id) => (
               <Grid item xs={12} sm={12} md={4} key={id}>
                 <Item>
                   <div className="flex flex-col justify-center items-start">
