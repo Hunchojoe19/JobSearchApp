@@ -183,21 +183,15 @@ const Home = () => {
   const education = user?.data?.educationDtoList;
 
   const handleSearch = () => {
-    console.log("details ", details);
     setJobs(
       details.filter((x) => {
         x.title.toLowerCase().includes(searchValues.search.toLowerCase()) &&
           x.location
             .toLowerCase()
             .includes(searchValues.location.toLowerCase());
-        // console.log("x", x.title);
-        // console.log("x2", x.location);
-        // console.log("seach values", searchValues.search);
-        // console.log("search location", searchValues.location);
       })
     );
   };
-  // console.log("jobs", jobs);
 
   return (
     <div className="container mx-auto mt-8">
