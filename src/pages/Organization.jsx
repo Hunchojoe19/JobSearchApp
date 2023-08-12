@@ -4,12 +4,14 @@ import { TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { saveUser } from "../redux/features/userSlice";
+import { TailSpin } from "react-loader-spinner";
 
 const LOGIN_URL =
   "https://internship-central-6f407278bcda.herokuapp.com/api/v6/authorize";
 const Organization = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [formValues, setFormValues] = useState({
     email: "",
     password: "",
@@ -20,6 +22,7 @@ const Organization = () => {
     password: formValues.password,
   };
   const handleAuth = (e) => {
+    setLoading(true);
     e.preventDefault();
     if (formValues.email && formValues.password) {
       const response = fetch(LOGIN_URL, {
@@ -38,16 +41,26 @@ const Organization = () => {
               token: response.headers.get("X-Access-Token"),
             })
           );
+          setLoading(false);
           navigate("/organization_home");
         } else if (response.status === 400) {
           navigate("/login");
           setErr("Invalid Credentials");
+          setTimeout(() => {
+            setLoading(false);
+          }, []);
         } else if (response.status === 403) {
           navigate("/login");
           setErr("UnAuthorized");
+          setTimeout(() => {
+            setLoading(false);
+          }, []);
         } else {
           setErr("wrong email/password");
           navigate("/login");
+          setTimeout(() => {
+            setLoading(false);
+          }, []);
         }
       });
     }
@@ -108,7 +121,19 @@ const Organization = () => {
                 errorMessages={["this field is required"]}
               />
               <button className="mx-24 mt-12 bg-blue-500 text-white font-['Inter] font-bold text-center w-[200px] h-16 rounded">
-                Sign In
+                {loading ? (
+                  <>
+                    <TailSpin
+                      height="25"
+                      width="25"
+                      radius="1"
+                      color="white"
+                      ariaLabel="loading"
+                    />
+                  </>
+                ) : (
+                  "Sign In"
+                )}
               </button>
             </ValidatorForm>
           </div>

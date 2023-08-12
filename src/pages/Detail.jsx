@@ -1,9 +1,10 @@
 import { Grid } from "@mui/material";
 import FlagIcon from "@mui/icons-material/Flag";
-import React from "react";
+import React, { useState } from "react";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { TailSpin } from "react-loader-spinner";
 
 const APPLY_FOR_JOB = ({ id }) =>
   `https://internship-central-6f407278bcda.herokuapp.com/api/application?jobId=${id}`;
@@ -13,6 +14,7 @@ const Detail = () => {
   const location = useLocation();
 
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   location.state;
 
@@ -21,6 +23,7 @@ const Detail = () => {
   const token = userDetails?.details?.token;
 
   const applyForJob = () => {
+    setLoading(true);
     fetch(APPLY_FOR_JOB({ id }), {
       method: "POST",
       headers: {
@@ -28,10 +31,15 @@ const Detail = () => {
         Authorization: `Bearer ${token}`,
       },
     }).then((res) => {
-      if (res.status === 200) {
-        navigate("/application-success", {
+      if (res.status === 201) {
+        navigate("/success", {
           state: { detail: location.state.detail },
         });
+        setLoading(false);
+      } else {
+        setTimeout(() => {
+          setLoading(false);
+        }, []);
       }
     });
   };
@@ -89,12 +97,25 @@ const Detail = () => {
               </div>
               <div className="mt-12 flex justify-center items-center mb-6">
                 <button
-                  className="rounded-lg py-2 px-28 bg-blue-900 text-white font-['Inter'] lg:w-[420px] lg:text-lg"
+                  className="rounded-lg py-2 px-28 bg-blue-900 text-white font-['Inter'] lg:w-[420px] lg:text-lg lg:w-[1200px]"
                   onClick={applyForJob}
                 >
-                  Apply Now
+                  {loading ? (
+                    <>
+                      <TailSpin
+                        height="25"
+                        width="25"
+                        radius="1"
+                        color="white"
+                        ariaLabel="loading"
+                      />
+                    </>
+                  ) : (
+                    "Apply Now"
+                  )}
                 </button>
               </div>
+
               <div className="flex flex-col items-start border border-solid border-blue-400 border-x-0 border-b-0">
                 <div className="mt-2 ml-3">
                   <h1 className="text-xl font-['Inter'] mb-4 font-bold">

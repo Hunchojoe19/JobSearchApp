@@ -46,8 +46,13 @@ const Navbar = () => {
   const username = select.details.username;
 
   localStorage.setItem("user", JSON.stringify({ ...select.details }));
+
   const users = localStorage.getItem("user");
   const { token } = JSON.parse(users);
+
+  const roles = select.details.role;
+  console.log("This roles ", roles);
+
   const email = select.details.email;
 
   const navigate = useNavigate();
@@ -59,6 +64,12 @@ const Navbar = () => {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const logout = () => {
+    localStorage.clear();
+    token === null;
+    navigate("/login");
   };
 
   return (
@@ -88,8 +99,7 @@ const Navbar = () => {
             </Link>
           </div>
         )}
-
-        {token && (
+        {token && roles === "USER" && (
           <div className="hidden md:flex justify-center items-center">
             <div className="hidden md:flex space-x-10 text-1.5xl mr-12 font-['Inter']">
               <Link to="/home" className="hover:text-darkGrayishBlue">
@@ -142,7 +152,7 @@ const Navbar = () => {
                     </p>
                   </div>
                 </MenuItem>
-                <MenuItem onClick={() => navigate("/auth")}>
+                <MenuItem onClick={logout}>
                   <div className="flex justify-center items-center">
                     <LogoutIcon
                       fontSize="medium"
@@ -172,6 +182,86 @@ const Navbar = () => {
             </div>
           </div>
         )}
+        {token && roles === "RECRUITER" && (
+          <div className="hidden md:flex justify-center items-center">
+            <div className="hidden md:flex space-x-10 text-1.5xl mr-12 font-['Inter']">
+              <Link to="/homepage" className="hover:text-darkGrayishBlue">
+                Home
+              </Link>
+            </div>
+            <StyledBadge
+              overlap="circular"
+              anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+              variant="dot"
+              sx={{ marginLeft: "2rem" }}
+            >
+              <Avatar
+                src="/broken-image.jpg"
+                sx={{ marginLeft: "1rem", cursor: "pointer" }}
+                onClick={handleClick}
+              />
+              <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={opened}
+                onClose={handleClose}
+                MenuListProps={{
+                  "aria-labelledby": "basic-button",
+                }}
+              >
+                <MenuItem onClick={() => navigate("/profile")}>
+                  <div className="flex justify-center items-center">
+                    <PersonIcon
+                      fontSize="medium"
+                      sx={{ marginRight: "0.5rem" }}
+                    />
+                    <p className="flex justify-center items-center font-bold">
+                      Profile
+                    </p>
+                  </div>
+                </MenuItem>
+
+                <MenuItem onClick={() => navigate("/settings")}>
+                  <div className="flex justify-center items-center">
+                    <SettingsIcon
+                      fontSize="medium"
+                      sx={{ marginRight: "0.5rem" }}
+                    />
+                    <p className="flex justify-center items-center font-bold">
+                      Settings
+                    </p>
+                  </div>
+                </MenuItem>
+                <MenuItem onClick={logout}>
+                  <div className="flex justify-center items-center">
+                    <LogoutIcon
+                      fontSize="medium"
+                      sx={{ marginRight: "0.5rem" }}
+                    />
+                    <p className="flex justify-center items-center font-bold">
+                      Logout
+                    </p>
+                  </div>
+                </MenuItem>
+              </Menu>
+            </StyledBadge>
+
+            <div className="ml-4">
+              <p className="text-base  text-darkGrayishBlue">
+                user name: {(" ", username)}
+              </p>
+              <p className="text-base text-darkGrayishBlue">{email}</p>
+            </div>
+            <div className="ml-24">
+              <button
+                onClick={logout}
+                className="px-12 py-4 bg-blue-600 rounded-full text-white font-bold font-['Inter'] hover:bg-blue-400"
+              >
+                Logout
+              </button>
+            </div>
+          </div>
+        )}
         <button
           id="menu-btn"
           className={`block hamburger md:hidden focus:outline-none ${
@@ -187,7 +277,7 @@ const Navbar = () => {
         </button>
       </div>
       <div className="md:hidden">
-        {token && (
+        {token && roles === "USER" && (
           <div
             id="menu"
             className={`${
@@ -200,6 +290,80 @@ const Navbar = () => {
             <Link to="" className="hover:text-darkGrayishBlue">
               Search Jobs
             </Link>
+            <div className="mt-4 flex flex-column justify-center items-center">
+              <StyledBadge
+                overlap="circular"
+                anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                variant="dot"
+                sx={{ marginLeft: "2rem" }}
+              >
+                <Avatar
+                  src="/broken-image.jpg"
+                  sx={{ marginLeft: "1rem", cursor: "pointer" }}
+                  onClick={handleClick}
+                />
+                <Menu
+                  id="basic-menu"
+                  anchorEl={anchorEl}
+                  open={opened}
+                  onClose={handleClose}
+                  MenuListProps={{
+                    "aria-labelledby": "basic-button",
+                  }}
+                >
+                  <MenuItem onClick={() => navigate("/profile")}>
+                    <div className="flex justify-center items-center">
+                      <PersonIcon
+                        fontSize="medium"
+                        sx={{ marginRight: "0.5rem" }}
+                      />
+                      <p className="flex justify-center items-center font-bold">
+                        Profile
+                      </p>
+                    </div>
+                  </MenuItem>
+
+                  <MenuItem onClick={() => navigate("/settings")}>
+                    <div className="flex justify-center items-center">
+                      <SettingsIcon
+                        fontSize="medium"
+                        sx={{ marginRight: "0.5rem" }}
+                      />
+                      <p className="flex justify-center items-center font-bold">
+                        Settings
+                      </p>
+                    </div>
+                  </MenuItem>
+                  <MenuItem onClick={() => navigate("/auth")}>
+                    <div className="flex justify-center items-center">
+                      <LogoutIcon
+                        fontSize="medium"
+                        sx={{ marginRight: "0.5rem" }}
+                      />
+                      <p className="flex justify-center items-center font-bold">
+                        Logout
+                      </p>
+                    </div>
+                  </MenuItem>
+                </Menu>
+              </StyledBadge>
+            </div>
+
+            <p className="ml-2">{email}</p>
+            <a href="/">Logout</a>
+          </div>
+        )}
+        {token && roles === "RECRUITER" && (
+          <div
+            id="menu"
+            className={`${
+              open ? "" : "hidden"
+            } flex flex-col items-center self-end py-8 mt-10 space-y-6 font-bold bg-white sm:w-auto sm:self-center left-6 right-6 drop-shadow-md`}
+          >
+            <Link to="/homepage" className="hover:text-darkGrayishBlue">
+              Home
+            </Link>
+
             <div className="mt-4 flex flex-column justify-center items-center">
               <StyledBadge
                 overlap="circular"

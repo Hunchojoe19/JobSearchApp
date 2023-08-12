@@ -3,6 +3,7 @@ import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { useDispatch, useSelector } from "react-redux";
 import { saveUser } from "../redux/features/userSlice";
 import { useNavigate, useLocation } from "react-router-dom";
+import { TailSpin } from "react-loader-spinner";
 import { Alert, Snackbar } from "@mui/material";
 
 const LOGIN_URL =
@@ -13,6 +14,7 @@ const Auth = () => {
   const [success, setSuccess] = useState(true);
   const [open, setOpen] = React.useState(true);
   const [err, setErr] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -28,7 +30,8 @@ const Auth = () => {
   // const from = location.state?.from?.pathname || "/";
 
   const { userDetails: select } = useSelector((state) => state);
-  "user details ", select.details;
+  console.log("user details ", select.details);
+  const roles = select?.details?.role;
 
   const [formValues, setFormValues] = useState({
     email: "",
@@ -43,6 +46,7 @@ const Auth = () => {
   };
   const handleAuth = (e) => {
     e.preventDefault();
+    setLoading(true);
     if (formValues.email && formValues.password) {
       const response = fetch(LOGIN_URL, {
         method: "POST",
@@ -56,6 +60,7 @@ const Auth = () => {
         "response token", token;
         // ("res ", response.headers["X-Access-Token"]);
         if (response.status === 204) {
+          setLoading(false);
           dispatch(saveUser({ ...loginDetails, token }));
           localStorage.setItem(
             "user",
@@ -64,14 +69,23 @@ const Auth = () => {
           setFormValues("");
           navigate("/home");
         } else if (response.status === 400) {
+          setTimeout(() => {
+            setLoading(false);
+          }, []);
           navigate("/auth");
           setErr("Invalid Credentials");
         } else if (response.status === 403) {
+          setTimeout(() => {
+            setLoading(false);
+          }, []);
           navigate("/auth");
           setErr("UnAuthorized");
         } else {
           setErr("wrong email/password");
           navigate("/auth");
+          setTimeout(() => {
+            setLoading(false);
+          }, []);
         }
       });
     }
@@ -139,7 +153,19 @@ const Auth = () => {
               </div>
 
               <button className="mx-24 mt-12 bg-blue-500 text-white font-['Inter] font-bold text-center w-[200px] h-16 rounded">
-                Sign In
+                {loading ? (
+                  <>
+                    <TailSpin
+                      height="25"
+                      width="25"
+                      radius="1"
+                      color="white"
+                      ariaLabel="loading"
+                    />
+                  </>
+                ) : (
+                  "Sign In"
+                )}
               </button>
             </ValidatorForm>
           </div>

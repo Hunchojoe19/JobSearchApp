@@ -212,6 +212,8 @@ const Home = () => {
     }
   }, [searchValues]);
 
+  console.log("users ", user);
+
   return (
     <div className="container mx-auto mt-8">
       <Box sx={{ width: "100%", flexGrow: 1 }}>
@@ -258,15 +260,15 @@ const Home = () => {
           </div>
           <button
             onClick={handleSearch}
-            className="w-[140px] h-[50px] bg-blue-500 rounded-full mt-4 font-normal text-white font-['Inter] mb-4 md:mt-10"
+            className="w-[140px] h-[50px] bg-blue-500 rounded-full mt-4 font-normal text-white font-['Inter] mb-4 md:mt-10 lg:mt-[4rem]"
           >
             Find a Job
           </button>
         </div>
-        <div className="w-[150px] h-[50px] bg-gray-800 rounded-full mt-12 py-4 flex justify-center items-center px-4 text-white font-['Inter']">
+        <div className="w-[150px] h-[50px] bg-gray-800 rounded-full mt-12 py-4 flex justify-center items-center px-4 text-white font-['Inter'] lg:mt-[4rem]">
           Jobs for You
         </div>
-        <div className="h-[2px] bg-gray-300 mt-6 mb-6" />
+        <div className="h-[2px] bg-gray-300 mt-6 mb-6 lg:mt-[3.7rem]" />
         <Grid
           container
           spacing={{ xs: 2, md: 3 }}

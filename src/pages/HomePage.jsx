@@ -47,9 +47,8 @@ const HomePage = () => {
       res.json().then((data) => {
         if (res.status === 200) {
           setDetails(data?.data);
-          data?.data;
-          setSize(data?.data?.totalItems);
-          setPage(data?.data?.totalPages);
+          setPage(totalPages);
+          setSize(totalItems);
         }
       })
     );
@@ -57,7 +56,7 @@ const HomePage = () => {
 
   useEffect(() => {
     getJob();
-  }, []);
+  }, [page, size]);
 
   return (
     <div className="container mx-auto p-6">

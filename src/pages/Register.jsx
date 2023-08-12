@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { useDispatch } from "react-redux";
 import { saveUser } from "../redux/features/userSlice";
+import { TailSpin } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
 
 const REGISTER_URL =
@@ -10,6 +11,7 @@ const REGISTER_URL =
 const Register = () => {
   const navigate = useNavigate();
   const [err, setErr] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const [formValues, setFormValues] = useState({
     firstName: "",
@@ -28,7 +30,7 @@ const Register = () => {
   };
   const handleAuth = (e) => {
     e.preventDefault();
-
+    setLoading(true);
     if (
       formValues.firstName &&
       formValues.lastName &&
@@ -45,7 +47,11 @@ const Register = () => {
         .then((response) => {
           if (response.status === 201) {
             navigate("/auth");
+            setLoading(false);
           } else {
+            setTimeout(() => {
+              setLoading(false);
+            }, []);
             setErr(response.errorMessages);
           }
         })
@@ -169,7 +175,19 @@ const Register = () => {
               />
 
               <button className="mx-24 mt-12 bg-blue-500 text-white font-['Inter] font-bold text-center w-[200px] h-16 rounded">
-                Sign Up
+                {loading ? (
+                  <>
+                    <TailSpin
+                      height="25"
+                      width="25"
+                      radius="1"
+                      color="white"
+                      ariaLabel="loading"
+                    />
+                  </>
+                ) : (
+                  "Sign Up"
+                )}
               </button>
             </ValidatorForm>
           </div>
